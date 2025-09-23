@@ -18,9 +18,26 @@ let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = `🕸 *Vincula el Socket usando el código QR.*\n\nSigue las instrucciones:\n🌿 *Mas opciones › Dispositivos vinculados › Vincular un nuevo dispositivo › Escanea el código QR.*\n\n_Recuerda que es recomendable no usar tu cuenta principal para registrar un socket._\n↺ El codigo es valido por 60 segundos.`
-let rtx2 = `🕸 *Vincula el Socket usando el código de 8 dígitos.*\n\nSigue las instrucciones:\n🌿 *Mas opciones › Dispositivos vinculados › Vincular un nuevo dispositivo › Vincular con el número de telefono › Introduce el código de 8 dígitos.*\n\n_Recuerda que es recomendable no usar tu cuenta principal para registrar un socket._\n↺ El codigo es valido por 60 segundos.`
-
+let rtx = `╭───⌁ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 ⌁───╮
+│ ☕ 𝑽𝒊𝒏𝒄𝒖𝒍𝒂 𝒖𝒔𝒂𝒏𝒅𝒐 𝒆𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝑸𝑹.
+│─────────────────────
+│ 🍁 𝑴𝒂𝒔 𝒐𝒑𝒄𝒊𝒐𝒏𝒆𝒔 › 𝑫𝒊𝒔𝒑𝒐𝒔𝒊𝒕𝒊𝒗𝒐𝒔 𝒗𝒊𝒏𝒄𝒖𝒍𝒂𝒅𝒐𝒔
+│ › 𝑽𝒊𝒏𝒄𝒖𝒍𝒂𝒓 𝒖𝒏 𝒏𝒖𝒆𝒗𝒐 𝒅𝒊𝒔𝒑𝒐𝒔𝒊𝒕𝒊𝒗𝒐
+│ › 𝑬𝒔𝒄𝒂𝒏𝒆𝒂 𝒆𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝑸𝑹.
+│─────────────────────
+│ ⚠️ 𝑵𝒐 𝒖𝒔𝒆𝒔 𝒕𝒖 𝒄𝒖𝒆𝒏𝒕𝒂 𝒑𝒓𝒊𝒏𝒄𝒊𝒑𝒂𝒍 𝒑𝒂𝒓𝒂 𝒓𝒆𝒈𝒊𝒔𝒕𝒓𝒂𝒓.
+│ ↺ 𝑬𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝒆𝒔 𝒗𝒂́𝒍𝒊𝒅𝒐 𝒑𝒐𝒓 60 𝒔𝒆𝒈𝒖𝒏𝒅𝒐𝒔.
+╰─────────────────────╯`
+let rtx2 = `╭───⌁ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 ⌁───╮
+│ ☕ 𝑽𝒊𝒏𝒄𝒖𝒍𝒂  𝒖𝒔𝒂𝒏𝒅𝒐 𝒆𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝒅𝒆 8 𝒅𝒊́𝒈𝒊𝒕𝒐𝒔.
+│─────────────────────
+│ 🍁 𝑴𝒂𝒔 𝒐𝒑𝒄𝒊𝒐𝒏𝒆𝒔 › 𝑫𝒊𝒔𝒑𝒐𝒔𝒊𝒕𝒊𝒗𝒐𝒔 𝒗𝒊𝒏𝒄𝒖𝒍𝒂𝒅𝒐𝒔
+│ › 𝑽𝒊𝒏𝒄𝒖𝒍𝒂𝒓 𝒄𝒐𝒏 𝒆𝒍 𝒏𝒖́𝒎𝒆𝒓𝒐 𝒅𝒆 𝒕𝒆𝒍𝒆𝒇𝒐𝒏𝒐
+│ › 𝑰𝒏𝒈𝒓𝒆𝒔𝒂 𝒆𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝒅𝒆 8 𝒅𝒊́𝒈𝒊𝒕𝒐𝒔.
+│─────────────────────
+│ ⚠️ 𝑵𝒐 𝒖𝒔𝒆𝒔 𝒕𝒖 𝒄𝒖𝒆𝒏𝒕𝒂 𝒑𝒓𝒊𝒏𝒄𝒊𝒑𝒂𝒍 𝒑𝒂𝒓𝒂 𝒓𝒆𝒈𝒊𝒔𝒕𝒓𝒂𝒓.
+│ ↺ 𝑬𝒍 𝒄𝒐́𝒅𝒊𝒈𝒐 𝒆𝒔 𝒗𝒂́𝒍𝒊𝒅𝒐 𝒑𝒐𝒓 60 𝒔𝒆𝒈𝒖𝒏𝒅𝒐𝒔.
+╰─────────────────────╯`
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const sanJBOptions = {}
@@ -69,7 +86,7 @@ fs.mkdirSync(pathSanJadiBot, { recursive: true })}
 try {
 args[0] && args[0] != undefined ? fs.writeFileSync(pathCreds, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
 } catch {
-conn.reply(m.chat, `🕸 *Use correctamente el comando »* ${usedPrefix + command} code`, m)
+conn.reply(m.chat, `☕ *Use correctamente el comando »* ${usedPrefix + command} code`, m)
 return
 }
 
@@ -212,7 +229,7 @@ renderLargerThumbnail: false
 } catch {
 console.log(chalk.gray('[ 🐼  ]  Error al enviar el mensaje al canal.'))
 }*/
-await conn.sendMessage(m.chat, {text: `🕸 Vinculaste con éxito un nuevo *Sub Bot*` }, { quoted: m })
+await conn.sendMessage(m.chat, {text: `☕ Vinculaste con éxito un nuevo *Sub Bot*` }, { quoted: m })
 delete commandFlags[m.sender]
 }
 
