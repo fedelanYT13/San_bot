@@ -54,6 +54,6 @@ console.log(`[ 🐼  ]  Error al enviar el mensaje al canal.\n[ 🕸  ]  ${e}`)
   if (validCommand(command, globalThis.plugins)) {
   } else {
     const comando = command;
-    await m.reply(`🕸 El comando *${comando}* no existe.\n> Usa *${usedPrefix}help* para ver la lista de comandos disponibles.`);
+    await m.reply(`☕ El comando *${comando}* no existe.\n> Usa *${usedPrefix}help* para ver la lista de comandos disponibles.`);
   }
 }
