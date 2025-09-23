@@ -15,12 +15,12 @@ async function handler(m, { conn: stars, usedPrefix }) {
 
   let replyMessage = message.length === 0 ? '' : message
   let totalUsers = users.length
-  let responseMessage = `*🕸 Total Sub-Bots »* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim()
+  let responseMessage = `*🍁 Total Sub-Bots »* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim()
 
   await stars.sendMessage(m.chat, { text: responseMessage, ...rcanal }, { quoted: m })
 }
 
-handler.command = ['sockets', 'bots']
-handler.help = ['bots', 'sockets']
+handler.command = ['botlis', 'bots']
+handler.help = ['bots', 'botslis']
 handler.tags = ['jadibot']
 export default handler
