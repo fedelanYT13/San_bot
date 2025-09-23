@@ -4,12 +4,12 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   try {
     if (!args[0]) {
       return m.reply(
-        `🕸 Ingresa un enlace de un video de Facebook`
+        `☕ Ingresa un enlace de un video de Facebook`
       );
     }
 
     if (!args[0].match(/facebook\.com|fb\.watch|video\.fb\.com/)) {
-      return m.reply('🫗 El enlace no parece *válido*. Asegúrate de que sea de *Facebook*');
+      return m.reply('🍁 El enlace no parece *válido*. Asegúrate de que sea de *Facebook*');
     }
 
    // await conn.sendMessage(m.chat, { text: '⏳ *Procesando video...*' }, { quoted: m });
@@ -23,7 +23,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
 
     const videoUrl = json.data.dl;
 
-    const caption = `𖣣ֶㅤ֯⌗ 🅕𝖡 🅓ownload\n\n🫗 *Enlace:* ${args[0]}`;
+    const caption = `🅓ownload\n\n📚 *Enlace:* ${args[0]}`;
 
     await conn.sendMessage(
       m.chat,
