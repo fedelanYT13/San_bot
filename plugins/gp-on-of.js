@@ -83,7 +83,6 @@ let handler = async (m, { conn, args, command}) => {
       break
 
     default:
-      default:
   return conn.sendMessage(m.chat, {
     text: `
 🌙 La función ingresada no es *válida*
