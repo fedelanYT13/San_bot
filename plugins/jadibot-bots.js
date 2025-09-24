@@ -28,10 +28,10 @@ const mention = bot.replace(/[^0-9]/g, '')
 return `@${mention}\n> Bot: ${isMainBot ? 'Principal' : 'Sub-Bot'}\n> Online: ${uptime}`}).join("\n\n") : `🌙 No hay bots activos en este grupo`
 const message = `*📚 Lista de bots activos*
 
-☕ Principal: *1*
-🍁 Subs: *${users.length - 1}*
+☕ _Principal:_ *1*
+🍁 _Subs:_ *${users.length - 1}*
 
-☕ En este grupo: *${groupBots.length}* bots
+☕ _En este grupo:_ *${groupBots.length}* bots
 ${botsGroup}`
 const mentionList = groupBots.map(bot => bot.endsWith("@s.whatsapp.net") ? bot : `${bot}@s.whatsapp.net`)
 rcanal.contextInfo.mentionedJid = mentionList
