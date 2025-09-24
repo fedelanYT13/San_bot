@@ -33,7 +33,7 @@ async function handler(m, { conn, usedPrefix, command}) {
 
   if (!mime) {
     return conn.sendMessage(m.chat, {
-      text: `☕ Responde a una imagen o video para convertirlo en sticker.\n\nEjemplo: *${usedPrefix + command}*`,
+      text: `☕ *_Responde a una imagen o video para convertirlo en sticker._*`,
 ...rcanal
 }, { quoted: m})
 }
