@@ -2,15 +2,11 @@ import fetch from "node-fetch"
 import yts from "yt-search"
 
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/
-const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙'
-const dev = 'Desarrollado por Moonfare Team'
-const icon = 'https://example.com/icon.jpg' // Reemplaza con tu imagen
-const redes = 'https://moonfare.team'       // Reemplaza con tu enlace
 
 const handler = async (m, { conn, text, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `☕ *_Debes escribir el nombre o link del video/audio para descargar._*`, m)
+      return conn.reply(m.chat, `☕ Debes escribir el nombre o link del video/audio para descargar._*`, m)
     }
 
     await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key }})
@@ -34,7 +30,7 @@ const handler = async (m, { conn, text, command }) => {
     const canal = author?.name || "Desconocido"
 
     const infoMessage = `
-*📥 Descarga en curso...*
+*_📥 Descarga en curso..._*
 
 🎧 *Título:* ${title}
 📺 *Canal:* ${canal}
@@ -46,24 +42,17 @@ const handler = async (m, { conn, text, command }) => {
 > © 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆 ☽
     `.trim()
 
-    const rcanal = {
-  contextInfo: {
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363423335018677@newsletter",
-      serverMessageId: '',
-      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
-},
-    externalAdReply: {
-      title: namebot,
-      body: dev,
-      mediaUrl: null,
-      description: null,
-      previewType: "PHOTO",
-      thumbnailUrl: icon,
-      sourceUrl: redes,
-      mediaType: 1,
-      renderLargerThumbnail: false
+    const thumb = (await conn.getFile(thumbnail))?.data
+    await conn.reply(m.chat, infoMessage, m, {
+      contextInfo: {
+        externalAdReply: {
+          title: botname,
+          body: dev,
+          mediaType: 1,
+          thumbnail: thumb,
+          renderLargerThumbnail: true,
+          mediaUrl: url,
+          sourceUrl: url
         }
       }
     })
@@ -137,4 +126,4 @@ function formatViews(views) {
   if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M`
   if (views >= 1_000) return `${(views / 1_000).toFixed(1)}k`
   return views.toString()
-          }
+    }
