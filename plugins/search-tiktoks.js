@@ -13,7 +13,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   const redes = 'https://moonfare.team'; 
 
   if (!text) {
-    return conn.reply(message.chat, "☕ Por favor, ingrese un texto,\nEjemplo: edit de Kaoruko", message);
+    return conn.reply(message.chat, "☕ Por favor, ingrese un texto,\n🌙 Ejemplo: *_edit de Kaoruko_*", message);
   }
 
   async function createVideoMessage(url) {
