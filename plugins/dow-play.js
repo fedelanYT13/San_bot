@@ -6,7 +6,7 @@ const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-z
 const handler = async (m, { conn, text, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `☕ *_Debes escribir el nombre o link* del video/audio para descargar._&`, m)
+      return conn.reply(m.chat, `☕ *_Debes escribir el nombre o link del video/audio para descargar._*`, m)
     }
 
     await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key }})
