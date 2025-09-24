@@ -103,9 +103,9 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   }
 };
 
-handler.help = ["tiktoksearch', 'tiktoks"];
+handler.help = ["tiktoksearch", "tiktoks"];
 handler.group = true;
 handler.tags = ["search"];
-handler.command = ["tiktoksearch", "ttss", "tiktoks"];
+handler.command = ["tiktoksearch", "tiktoks"];
 
 export default handler;
