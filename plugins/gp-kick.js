@@ -70,10 +70,10 @@ async function handler(m, { conn, participants, isAdmin, isBotAdmin}) {
 }, { quoted: m})
 }
 
-handler.command = ['kick', 'expulsar']
-handler.help = ['kick @usuario']
-handler.tags = ['grupo']
+handler.customPrefix = /^(kick|ban|expulsar)$/i;
+handler.command = new RegExp;
 handler.group = true
 handler.admin = true
 handler.botAdmin = true
-export default handler
+
+export default handler;
