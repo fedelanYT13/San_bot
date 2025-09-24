@@ -59,5 +59,5 @@ async function handler(m, { conn, usedPrefix, command}) {
 
 handler.command = ['sticker', 's', 'stiker']
 handler.help = ['sticker']
-handler.tags = ['sticker]
+handler.tags = ['Herramientas']
 export default handler
