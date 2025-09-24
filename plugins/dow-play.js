@@ -2,14 +2,13 @@ import fetch from "node-fetch"
 import yts from "yt-search"
 
 const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/
-const perfil = 'https://files.catbox.moe/gm249p.jpg'; 
-const dev = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕'; 
-const redes = 'https://moonfare.team'; 
 
 const handler = async (m, { conn, text, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `🌙 Debes escribir *el nombre o link* del video/audio para descargar.`, m)
+      return conn.reply(m.chat, `☕ Debes escribir *el nombre o link* del video/audio para descargar.`,
+...rcanal
+}, { quoted: m})
     }
 
     await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key }})
@@ -45,24 +44,17 @@ const handler = async (m, { conn, text, command }) => {
 > © 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆 ☽
     `.trim()
 
-    const fakeContext = {
-    contextInfo: {
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: "120363423335018677@newsletter",
-        serverMessageId: '',
-        newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
-},
-      externalAdReply: {
-        title: namebot,
-        body: dev,
-        mediaUrl: null,
-        description: null,
-        previewType: "PHOTO",
-        thumbnailUrl: icon,
-        sourceUrl: redes,
-        mediaType: 1,
-        renderLargerThumbnail: false
+    const thumb = (await conn.getFile(thumbnail))?.data
+    await conn.reply(m.chat, infoMessage, m, {
+      contextInfo: {
+        externalAdReply: {
+          title: botname,
+          body: dev,
+          mediaType: 1,
+          thumbnail: thumb,
+          renderLargerThumbnail: true,
+          mediaUrl: url,
+          sourceUrl: url
         }
       }
     })
@@ -78,7 +70,7 @@ const handler = async (m, { conn, text, command }) => {
 
       if (!audioData) {
         await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key }})
-        return conn.reply(m.chat, "✦ No se pudo descargar el audio. Intenta más tarde.", m)
+        return conn.reply(m.chat, "🌙 No se pudo descargar el audio. Intenta más tarde.", m)
       }
 
       await conn.sendMessage(m.chat, {
@@ -136,4 +128,4 @@ function formatViews(views) {
   if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M`
   if (views >= 1_000) return `${(views / 1_000).toFixed(1)}k`
   return views.toString()
-                     }
+  }
