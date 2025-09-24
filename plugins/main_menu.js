@@ -117,6 +117,7 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
         isForwarded: true,
         newsletterJid: '120363423335018677@newsletter',
         newsletterName: '🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽',
+        serverMessageId: '',
         forwardingScore: 999,
         externalAdReply: {
           title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
