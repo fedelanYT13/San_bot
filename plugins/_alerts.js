@@ -1,93 +1,113 @@
-let WAMessageStubType = (await import('@whiskeysockets/baileys')).default
 import fs from 'fs'
 import path from 'path'
+import chalk from 'chalk'
+const { default: WAMessageStubType} = await import('@whiskeysockets/baileys')
 
-const groupMetadataCache = new Map();
-const lidCache = new Map();
+const groupMetadataCache = new Map()
+const lidCache = new Map()
+
 let handler = m => m
-handler.before = async function (m, { conn, participants, groupMetadata }) {
 
-if (!m.messageStubType || !m.isGroup) return
-let chat = globalThis.db.data.chats[m.chat]
-let userss = m.messageStubParameters[0]
-const realSender = await resolveLidToRealJid(m?.sender, conn, m?.chat);
+handler.before = async function (m, { conn, participants, groupMetadata}) {
+    if (!m.messageStubType ||!m.isGroup) return
 
-let admingp, noadmingp
-admingp = `🕸 @${userss.split('@')[0]} ha sido promovido a Administrador por @${realSender.split('@')[0]}`
-noadmingp =  `🕸 @${userss.split('@')[0]} ha sido degradado de Administrador por @${realSender.split('@')[0]}`
+    const chat = globalThis.db.data.chats[m.chat]
+    const userJid = m.messageStubParameters[0]
+    const realSender = await resolveLidToRealJid(m?.sender, conn, m?.chat)
 
-if (chat.detect && m.messageStubType == 2) {
-const uniqid = (m.isGroup ? m.chat : m.sender).split('@')[0]
-const sessionPath = `./${sessions}/`
-for (const file of await fs.readdir(sessionPath)) {
-if (file.includes(uniqid)) {
-await fs.unlink(path.join(sessionPath, file))
-console.log(`${chalk.yellow.bold('✎ Delete!')} ${chalk.greenBright(`'${file}'`)}\n${chalk.redBright('Que provoca el "undefined" en el chat.')}`)
-}}
+    const userTag = `@${userJid.split('@')[0]}`
+    const senderTag = `@${realSender.split('@')[0]}`
 
-} if (chat.alerts && m.messageStubType == 29) {
-await conn.sendMessage(m.chat, { text: admingp, mentions: [userss, realSender] }, { quoted: null })  
+    const promotedMsg = `☕ ${userTag} ha sido *promovido a Administrador* por ${senderTag}`
+    const demotedMsg = `🌙 ${userTag} ha sido *degradado de Administrador* por ${senderTag}`
 
-return;
-} if (chat.alerts && m.messageStubType == 30) {
-await conn.sendMessage(m.chat, { text: noadmingp, mentions: [userss, realSender] }, { quoted: null })  
+    // Eliminar sesiones si se detecta un cambio
+    if (chat.detect && m.messageStubType === 2) {
+        const uniqid = (m.isGroup? m.chat: m.sender).split('@')[0]
+        const sessionPath = `./${sessions}/`
 
-} else { 
-if (m.messageStubType == 2) return
-console.log({messageStubType: m.messageStubType,
-messageStubParameters: m.messageStubParameters,
-type: WAMessageStubType[m.messageStubType], 
+        for (const file of await fs.readdir(sessionPath)) {
+            if (file.includes(uniqid)) {
+                await fs.unlink(path.join(sessionPath, file))
+                console.log(`${chalk.yellow.bold('✎ Delete!')} ${chalk.greenBright(`'${file}'`)}\n${chalk.redBright('Que provoca el "undefined" en el chat.')}`)
+}
+}
+}
+
+    // Alertas de promoción y degradación
+    if (chat.alerts) {
+        if (m.messageStubType === 29) {
+            await conn.sendMessage(m.chat, { text: promotedMsg, mentions: [userJid, realSender]}, { quoted: null})
+            return
+}
+
+        if (m.messageStubType === 30) {
+            await conn.sendMessage(m.chat, { text: demotedMsg, mentions: [userJid, realSender]}, { quoted: null})
+            return
+}
+}
+
+    // Log de otros tipos de eventos
+    if (m.messageStubType!== 2) {
+        console.log({
+            messageStubType: m.messageStubType,
+            messageStubParameters: m.messageStubParameters,
+            type: WAMessageStubType[m.messageStubType],
 })
-}}
+}
+}
+
 export default handler
 
+/**
+ * Resuelve un JID con sufijo @lid al JID real del participante
+ */
 async function resolveLidToRealJid(lid, conn, groupChatId, maxRetries = 3, retryDelay = 60000) {
-    const inputJid = lid.toString();
-    if (!inputJid.endsWith("@lid") || !groupChatId?.endsWith("@g.us")) {
-        return inputJid.includes("@") ? inputJid : `${inputJid}@s.whatsapp.net`;
-    }
+    const inputJid = lid.toString()
+
+    if (!inputJid.endsWith("@lid") ||!groupChatId?.endsWith("@g.us")) {
+        return inputJid.includes("@")? inputJid: `${inputJid}@s.whatsapp.net`
+}
 
     if (lidCache.has(inputJid)) {
-        return lidCache.get(inputJid);
-    }
+        return lidCache.get(inputJid)
+}
 
-    const lidToFind = inputJid.split("@")[0];
-    let attempts = 0;
+    const lidToFind = inputJid.split("@")[0]
+    let attempts = 0
 
     while (attempts < maxRetries) {
         try {
-            const metadata = await conn?.groupMetadata(groupChatId);
-            if (!metadata?.participants) {
-                throw new Error("No se obtuvieron participantes");
-            }
+            const metadata = await conn?.groupMetadata(groupChatId)
+            if (!metadata?.participants) throw new Error("No se obtuvieron participantes")
 
             for (const participant of metadata.participants) {
                 try {
-                    if (!participant?.jid) continue;
-                    const contactDetails = await conn?.onWhatsApp(participant.jid);
-                    if (!contactDetails?.[0]?.lid) continue;
+                    if (!participant?.jid) continue
+                    const contactDetails = await conn?.onWhatsApp(participant.jid)
+                    if (!contactDetails?.[0]?.lid) continue
 
-                    const possibleLid = contactDetails[0].lid.split("@")[0];
+                    const possibleLid = contactDetails[0].lid.split("@")[0]
                     if (possibleLid === lidToFind) {
-                        lidCache.set(inputJid, participant.jid);
-                        return participant.jid;
-                    }
-                } catch (e) {
-                    continue;
-                }
-            }
+                        lidCache.set(inputJid, participant.jid)
+                        return participant.jid
+}
+} catch {
+                    continue
+}
+}
 
-            lidCache.set(inputJid, inputJid);
-            return inputJid;
+            lidCache.set(inputJid, inputJid)
+            return inputJid
 
-        } catch (e) {
-            if (++attempts >= maxRetries) {
-                lidCache.set(inputJid, inputJid);
-                return inputJid;
-            }
-            await new Promise((resolve) => setTimeout(resolve, retryDelay));
-        }
-    }
+} catch {
+            if (++attempts>= maxRetries) {
+                lidCache.set(inputJid, inputJid)
+                return inputJid
+}
+            await new Promise(resolve => setTimeout(resolve, retryDelay))
+}
+}
 
-    return inputJid;
+    return inputJid
 }
