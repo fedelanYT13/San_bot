@@ -16,7 +16,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   try {
     if (!args[0]) {
       return m.reply(
-        `🕸 Ingresa un enlace de un apk de mediafire o un titulo.`
+        `☕ Ingresa un enlace de un apk de mediafire o un titulo.`
       );
     }
 
@@ -32,7 +32,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       const searchData = searchRes.data;
 
       if (!searchData.status || !searchData.results?.length) {
-        return m.reply('🌿 No se encontraron resultados para tu búsqueda.');
+        return m.reply('🌙 No se encontraron resultados para tu búsqueda.');
       }
 
       const result = searchData.results[Math.floor(Math.random() * searchData.results.length)];
@@ -43,7 +43,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     const data = response.data;
 
     if (!data.status || !data.data) {
-      return m.reply('☁️ No se pudo procesar el enlace.');
+      return m.reply('🌙 No se pudo procesar el enlace.');
     }
 
     const { title, peso, fecha, tipo, dl } = data.data;
@@ -69,7 +69,7 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
       );
     } else {
       await conn.sendMessage(m.chat, {
-        text: `🕸 *El archivo supera el límite permitido para envío directo.*`
+        text: `☕ *El archivo supera el límite permitido para envío directo.*`
       }, { quoted: m });
     }
 
