@@ -15,7 +15,7 @@ async function handler(m, { conn: stars, usedPrefix }) {
 
   let replyMessage = message.length === 0 ? '' : message
   let totalUsers = users.length
-  let responseMessage = `*☕ principal »* 1 || '0'}\n\n${replyMessage.trim()}`.trim()
+  let responseMessage = `*☕ principal »* 1`.trim()
   let responseMessage = `*🍁 Total Sub-Bots »* ${totalUsers || '0'}\n\n${replyMessage.trim()}`.trim()
 
   await stars.sendMessage(m.chat, { text: responseMessage, ...rcanal }, { quoted: m })
