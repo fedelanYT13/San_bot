@@ -3,7 +3,6 @@ import path from 'path'
 import chalk from 'chalk'
 const { default: WAMessageStubType} = await import('@whiskeysockets/baileys')
 
-// Variables externas (asegúrate de definirlas en tu entorno)
 const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙'
 const dev = '𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'
 const icon = 'https://files.catbox.moe/gm249p.jpg'
