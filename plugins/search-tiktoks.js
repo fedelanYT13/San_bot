@@ -9,11 +9,11 @@ const {
 
 let handler = async (message, { conn, text, usedPrefix, command }) => {
   const avatar = 'https://files.catbox.moe/gm249p.jpg'; 
-  const dev = '𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'; 
+  const dev = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕'; 
   const redes = 'https://moonfare.team'; 
 
   if (!text) {
-    return conn.reply(message.chat, "☕ Por favor, ingrese un texto para realizar una búsqueda en TikTok.", message);
+    return conn.reply(message.chat, "☕ Por favor, ingrese un texto,\nEjemplo: edit de Kaoruko", message);
   }
 
   async function createVideoMessage(url) {
@@ -34,7 +34,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
 
   try {
     // Mensaje de espera con emoji ⌛
-    conn.reply(message.chat, '⌛ *Buscando sus tiktoks. ..*', message, {
+    conn.reply(message.chat, '⌛ *Buscando sus tiktoks...*', message, {
       contextInfo: { 
         externalAdReply: { 
           mediaUrl: null, 
