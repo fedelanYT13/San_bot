@@ -1,14 +1,42 @@
-import ws from 'ws'
+const namebot = 'MoonBot'
+const dev = 'Desarrollado por Moonfare Team'
+const icon = 'https://example.com/icon.jpg'
+const redes = 'https://moonfare.team'
+
+const rcanal = {
+  contextInfo: {
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: "120363423335018677@newsletter",
+      serverMessageId: '',
+      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+},
+    externalAdReply: {
+      title: namebot,
+      body: dev,
+      mediaUrl: null,
+      description: null,
+      previewType: "PHOTO",
+      thumbnailUrl: icon,
+      sourceUrl: redes,
+      mediaType: 1,
+      renderLargerThumbnail: false
+}
+}
+}
 
 async function handler(m, { conn}) {
-  let activeBots = global.conns.filter(bot => bot.user && bot.ws?.socket?.readyState!== ws.CLOSED)
+  const activeBots = global.conns.filter(bot => bot.user && bot.ws?.socket?.readyState!== ws.CLOSED)
 
   if (activeBots.length <= 1) {
-    await conn.sendMessage(m.chat, { text: '⚠️ No hay Sub-Bots activos para eliminar.'}, { quoted: m})
+    await conn.sendMessage(m.chat, {
+      text: '⚠️ No hay Sub-Bots activos para eliminar.',
+...rcanal
+}, { quoted: m})
     return
 }
 
-  const subBots = activeBots.slice(1)
+  const subBots = activeBots.slice(1) // Excluye el Bot Principal
 
   for (const bot of subBots) {
     try {
@@ -21,6 +49,7 @@ async function handler(m, { conn}) {
 
   await conn.sendMessage(m.chat, {
     text: `✅ Se han eliminado ${subBots.length} Sub-Bots.\n🤖 Bot Principal sigue activo.`,
+...rcanal
 }, { quoted: m})
 }
 
