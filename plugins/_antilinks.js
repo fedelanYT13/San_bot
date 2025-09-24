@@ -13,6 +13,6 @@ if (hasAllowedLink) return
 
 if (chat.antilinks && isGroupLink && !isAdmin && isBotAdmin && !isModeration && m.key.participant !== conn.user.jid) {
 await conn.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: false, id: m.key.id, participant: m.key.participant }})
-await conn.reply(m.chat, `*${globalThis.db.data.users[m.key.participant].name}* Fue eliminado por \`Anti-Link\``, m)
+await conn.reply(m.chat, `*${globalThis.db.data.users[m.key.participant].name}*☕ Fue eliminado por \`ANTI-LINKS\``, m)
 await conn.groupParticipantsUpdate(m.chat, [m.key.participant], 'remove')
 }}
