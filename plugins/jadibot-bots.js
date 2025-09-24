@@ -15,11 +15,11 @@ async function handler(m, { conn: stars, usedPrefix}) {
   const mainBot = users[0]
   const mainBotInfo = mainBot
 ? `*☕ Bot Principal »* ${mainBot.user.name || '-'}\n   ↳ wa.me/${mainBot.user.jid.replace(/[^0-9]/g, '')}`
-: '*🍁 Bot Principal »* No disponible'
+: '*🍁 Bot Principal »* 1'
 
   const subBots = users.slice(1)
   const subBotList = subBots.map((v, i) =>
-    `*#${i + 1} Sub-Bot »* ${v.user.name || '-'}\n   ↳ wa.me/${v.user.jid.replace(/[^0-9]/g, '')}`
+    `*#${i + } Sub-Bot »* ${v.user.name || '-'}\n   ↳ wa.me/${v.user.jid.replace(/[^0-9]/g, '')}`
 ).join('\n\n')
 
   const responseMessage = `
