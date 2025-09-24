@@ -72,7 +72,7 @@ const handler = async (m, { conn, text, command}) => {
 📅 *Publicado:* ${ago}
 🔗 *Enlace:* ${url}
 
-☕ ${namebot}
+${namebot}
     `.trim()
 
     const thumb = (await conn.getFile(thumbnail))?.data
