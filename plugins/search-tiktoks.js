@@ -8,7 +8,6 @@ const {
 } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (message, { conn, text, usedPrefix, command }) => {
-  // VARIABLES DEFINIDAS
   const avatar = 'https://files.catbox.moe/gm249p.jpg'; 
   const dev = '𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'; 
   const redes = 'https://moonfare.team'; 
