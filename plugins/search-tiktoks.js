@@ -43,7 +43,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
           title: '🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽',
           body: dev,
           previewType: 0, 
-          thumbnail: avatar,
+          thumbnailUrl: perfil,
           sourceUrl: redes 
         }
       }
