@@ -115,8 +115,10 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
       contextInfo: {
         mentionedJid: [m.sender],
         isForwarded: true,
-        forwardingScore: 999,
-        externalAdReply: {
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: '120363423335018677@newsletter',
+        serverMessageId: '',
+        newsletterName: '🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽',
           title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
           thumbnailUrl: perfil,
           mediaType: 1,
