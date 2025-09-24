@@ -8,7 +8,7 @@ const {
 } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (message, { conn, text, usedPrefix, command }) => {
-  const avatar = 'https://files.catbox.moe/gm249p.jpg'; 
+  const perfil = 'https://files.catbox.moe/gm249p.jpg'; 
   const dev = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕'; 
   const redes = 'https://moonfare.team'; 
 
