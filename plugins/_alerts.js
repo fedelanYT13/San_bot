@@ -3,6 +3,12 @@ import path from 'path'
 import chalk from 'chalk'
 const { default: WAMessageStubType} = await import('@whiskeysockets/baileys')
 
+// Variables externas (asegúrate de definirlas en tu entorno)
+const namebot = 'MoonBot'
+const dev = 'Desarrollado por Dev-Fedexyz'
+const icon = 'https://files.catbox.moe/gm249p.jpg'
+const redes = 'https://moonfare.team'
+
 const groupMetadataCache = new Map()
 const lidCache = new Map()
 
@@ -18,8 +24,39 @@ handler.before = async function (m, { conn, participants, groupMetadata}) {
     const userTag = `@${userJid.split('@')[0]}`
     const senderTag = `@${realSender.split('@')[0]}`
 
-    const promotedMsg = `☕ ${userTag} ha sido *promovido a Administrador* por ${senderTag}`
-    const demotedMsg = `🌙 ${userTag} ha sido *degradado de Administrador* por ${senderTag}`
+    const fakeContext = {
+        contextInfo: {
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: "120363423335018677@newsletter",
+                serverMessageId: '',
+                newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+},
+            externalAdReply: {
+                title: namebot,
+                body: dev,
+                mediaUrl: null,
+                description: null,
+                previewType: "PHOTO",
+                thumbnailUrl: icon,
+                sourceUrl: redes,
+                mediaType: 1,
+                renderLargerThumbnail: false
+}
+}
+}
+
+    const promotedMsg = {
+        text: `☕ ${userTag} ha sido *promovido a Administrador* por ${senderTag}`,
+        mentions: [userJid, realSender],
+...fakeContext
+}
+
+    const demotedMsg = {
+        text: `🌙 ${userTag} ha sido *degradado de Administrador* por ${senderTag}`,
+        mentions: [userJid, realSender],
+...fakeContext
+}
 
     // Eliminar sesiones si se detecta un cambio
     if (chat.detect && m.messageStubType === 2) {
@@ -37,12 +74,12 @@ handler.before = async function (m, { conn, participants, groupMetadata}) {
     // Alertas de promoción y degradación
     if (chat.alerts) {
         if (m.messageStubType === 29) {
-            await conn.sendMessage(m.chat, { text: promotedMsg, mentions: [userJid, realSender]}, { quoted: null})
+            await conn.sendMessage(m.chat, promotedMsg, { quoted: null})
             return
 }
 
         if (m.messageStubType === 30) {
-            await conn.sendMessage(m.chat, { text: demotedMsg, mentions: [userJid, realSender]}, { quoted: null})
+            await conn.sendMessage(m.chat, demotedMsg, { quoted: null})
             return
 }
 }
