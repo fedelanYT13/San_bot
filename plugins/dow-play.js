@@ -1,101 +1,139 @@
-import yts from 'yt-search';
-import fetch from 'node-fetch';
-const limit = 100;
+import fetch from "node-fetch"
+import yts from "yt-search"
 
-const isYTUrl = (url) => /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/i.test(url);
+const youtubeRegexID = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([a-zA-Z0-9_-]{11})/
+const perfil = 'https://files.catbox.moe/gm249p.jpg'; 
+const dev = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕'; 
+const redes = 'https://moonfare.team'; 
 
 const handler = async (m, { conn, text, command }) => {
   try {
     if (!text.trim()) {
-      return conn.reply(m.chat, `🕸 Ingresa el nombre de la música o una URL de YouTube.`, m);
+      return conn.reply(m.chat, `🌙 Debes escribir *el nombre o link* del video/audio para descargar.`, m)
     }
 
-    const esURL = isYTUrl(text);
-    let url, title;
+    await conn.sendMessage(m.chat, { react: { text: "⏳", key: m.key }})
 
-    if (!esURL) {
-      const search = await yts(text);
-      if (!search.all.length) return m.reply('🍁 No se encontraron resultados.');
+    let videoIdToFind = text.match(youtubeRegexID) || null
+    let ytplay2 = await yts(videoIdToFind ? "https://youtu.be/" + videoIdToFind[1] : text)
 
-      const videoInfo = search.all[0];
-      ({ title, url } = videoInfo);
-
-      const vistas = (videoInfo.views || 0).toLocaleString();
-      const canal = videoInfo.author?.name || 'Desconocido';
-      const infoMessage = `˚∩　ׅ　🅨𝗈𝗎𝖳𝗎𝖻𝖾 🅟𝗅𝖺𝗒　ׄᰙ　ׅ
-
-> 🕸̴𖫲᮫ִ۫𝆬  Descargando › *${title}*
-
-𖣣ֶㅤ֯⌗ 🐤 ׄ ⬭ Canal › *${canal}*
-𖣣ֶㅤ֯⌗ 🌿 ׄ ⬭ Duración › *${videoInfo.timestamp}*
-𖣣ֶㅤ֯⌗ 🌾 ׄ ⬭ Vistas › *${vistas}*
-𖣣ֶㅤ֯⌗ ⭐ ׄ ⬭ Publicado › *${videoInfo.ago}*
-𖣣ֶㅤ֯⌗ 🥙 ׄ ⬭ Enlace › *${url}*
-
-${dev}`;
-
-      const thumb = (await conn.getFile(videoInfo.thumbnail))?.data;
-      await conn.sendMessage(m.chat, { image: thumb, caption: infoMessage }, { quoted: m });
-    } else {
-      url = text;
+    if (videoIdToFind) {
+      const videoId = videoIdToFind[1]
+      ytplay2 = ytplay2.all.find(item => item.videoId === videoId) || ytplay2.videos.find(item => item.videoId === videoId)
     }
 
-    if (['play', 'mp3', 'playaudio', 'ytmp3'].includes(command)) {
-      const response = await fetch(`${api.url}/dow/ytmp3?url=${encodeURIComponent(url)}&apikey=${api.key}`);
-      const result = await response.json();
-
-      if (!result.status || !result.data) return m.reply('🐼 Error al descargar el audio.');
-
-      const { dl, title } = result.data;
-
-      await conn.sendMessage(
-        m.chat,
-        {
-          audio: { url: dl },
-          fileName: `${title}.mp3`,
-          mimetype: 'audio/mpeg',
-          ptt: true
-        },
-        { quoted: m }
-      );
-    } else if (['play2', 'mp4', 'playvideo', 'ytmp4'].includes(command)) {
-    const response = await fetch(`${api.url}/dow/ytmp4?url=${encodeURIComponent(url)}&apikey=${api.key}`)
-    const result = await response.json()
-
-    if (!result.status || !result.data || !result.data.downloadsVideo?.length) {
-     return m.reply('🚩 Error al *descargar* el video')
+    ytplay2 = ytplay2.all?.[0] || ytplay2.videos?.[0] || ytplay2
+    if (!ytplay2) {
+      await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key }})
+      return m.reply("⚠︎ No encontré resultados, intenta con otro nombre o link.")
     }
 
-    try {
-     const selected = result.data.downloadsVideo.find(v => {
-     const sizeMB = parseFloat(v.size.replace(' MB', ''))
-     return sizeMB <= limit
-  }) || result.data.downloadsVideo[0]
+    let { title, thumbnail, timestamp, views, ago, url, author } = ytplay2
+    const vistas = formatViews(views)
+    const canal = author?.name || "Desconocido"
 
-  const { url: dl, quality, resolution, size } = selected
-  const title = result.data.title
-  const res = await fetch(dl)
-  const contentLength = res.headers.get('Content-Length')
-  const fileSize = parseInt(contentLength || '0', 10) / (1024 * 1024)
-  const asDocument = fileSize >= limit
+    const infoMessage = `
+*📥 Descarga en curso...*
 
-  await client.sendMessage(
-    m.chat,
-    {
-      video: { url: dl },
-      fileName: `${title}.mp4`,
-      asDocument,
-      mimetype: 'video/mp4'
-    },
-    { quoted: m }
-  )
-     } 
-  } catch (e) {
-    await m.reply('🕸 Error.');
+🎧 *Título:* ${title}
+📺 *Canal:* ${canal}
+⏱️ *Duración:* ${timestamp}
+👁️ *Vistas:* ${vistas}
+📅 *Publicado:* ${ago}
+🔗 *Enlace:* ${url}
+
+> © 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆 ☽
+    `.trim()
+
+    const fakeContext = {
+    contextInfo: {
+      isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: "120363423335018677@newsletter",
+        serverMessageId: '',
+        newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+},
+      externalAdReply: {
+        title: namebot,
+        body: dev,
+        mediaUrl: null,
+        description: null,
+        previewType: "PHOTO",
+        thumbnailUrl: icon,
+        sourceUrl: redes,
+        mediaType: 1,
+        renderLargerThumbnail: false
+        }
+      }
+    })
+
+    if (["play", "yta", "ytmp3", "playaudio"].includes(command)) {
+      let audioData = null
+      try {
+        const r = await (await fetch(`https://ruby-core.vercel.app/api/download/youtube/mp3?url=${encodeURIComponent(url)}`)).json()
+        if (r?.status && r?.download?.url) {
+          audioData = { link: r.download.url, title: r.metadata?.title }
+        }
+      } catch {}
+
+      if (!audioData) {
+        await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key }})
+        return conn.reply(m.chat, "✦ No se pudo descargar el audio. Intenta más tarde.", m)
+      }
+
+      await conn.sendMessage(m.chat, {
+        audio: { url: audioData.link },
+        fileName: `${audioData.title || "music"}.mp3`,
+        mimetype: "audio/mpeg",
+        ptt: false
+      }, { quoted: m })
+
+      await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key }})
+    }
+
+    else if (["play2", "ytv", "ytmp4", "mp4"].includes(command)) {
+      let videoData = null
+      try {
+        const r = await (await fetch(`https://ruby-core.vercel.app/api/download/youtube/mp4?url=${encodeURIComponent(url)}`)).json()
+        if (r?.status && r?.download?.url) {
+          videoData = { link: r.download.url, title: r.metadata?.title }
+        }
+      } catch {}
+
+      if (!videoData) {
+        await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key }})
+        return conn.reply(m.chat, "🌙 No se pudo descargar el video. Intenta más tarde.", m)
+      }
+
+      await conn.sendMessage(m.chat, {
+        video: { url: videoData.link },
+        fileName: `${videoData.title || "video"}.mp4`,
+        caption: `${title}`,
+        mimetype: "video/mp4"
+      }, { quoted: m })
+
+      await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key }})
+    }
+
+    else {
+      return conn.reply(m.chat, "🌘 Comando no válido, revisa el menú.", m)
+    }
+
+  } catch (error) {
+    await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key }})
+    return m.reply(`⚠︎ Error inesperado:\n\n${error}`)
   }
-};
+}
 
-handler.command = handler.help = ['play', 'mp3', 'playaudio', 'ytmp3', 'play2', 'mp4', 'playvideo', 'ytmp4'];
-handler.tags = ['dow'];
+handler.command = handler.help = ["play", "ytmp3", "play2", "ytmp4", "playaudio"]
+handler.tags = ["descargas"]
 
-export default handler;
+export default handler
+
+function formatViews(views) {
+  if (!views) return "No disponible"
+  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B`
+  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M`
+  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}k`
+  return views.toString()
+                     }
