@@ -83,8 +83,22 @@ let handler = async (m, { conn, args, command}) => {
       break
 
     default:
-      return conn.sendMessage(m.chat, {
-        text: `🌙 funcion no es *válida*\n\n📚 *Configuraciones disponibles:*\n- welcome\n- antienlaces\n- economia\n- gacha\n- nsfw\n- soloadmin\n- alertas\n\n☕ *Ejemplo:* ${command} welcome`,
+      default:
+  return conn.sendMessage(m.chat, {
+    text: `
+🌙 La función ingresada no es *válida*
+
+📚 *Funciones disponibles:*
+  └─ welcome
+  └─ antienlaces
+  └─ economia
+  └─ gacha
+  └─ nsfw
+  └─ soloadmin
+  └─ alertas
+
+☕ *Ejemplo:* ${command} welcome
+    `.trim(),
 ...rcanal
 }, { quoted: m})
 }
