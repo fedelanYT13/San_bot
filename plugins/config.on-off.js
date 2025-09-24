@@ -19,7 +19,6 @@ let handler = async (m, { conn, args, command }) => {
       reply('Anti Enlaces');
       break;
 
-
     case 'nsfw':
       chatData.nsfw = status;
       reply('NSFW');
