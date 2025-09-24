@@ -38,7 +38,7 @@ let handler = async (m, { conn, args, command }) => {
 
     default:
       m.reply(
-        `❎ Opción no *válida*\n\n☕ *Configuraciónes disponibles:*\nwelcome\nantienlaces\nnsfw\nsoloadmin\n- alertas\n\n📚 *Ejemplo:* ${command} welcome 
+        `❎ Opción no *válida*\n\n☕ *Configuraciónes disponibles:*\nwelcome\nantienlaces\nnsfw\nsoloadmin\n- alertas\n\n📚 *Ejemplo:* ${command} welcome'
       );
       break;
   }
