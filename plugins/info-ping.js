@@ -39,7 +39,7 @@ async function handler(m, { conn}) {
   const currentTime = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires'})
 
   const info = `
-☕ *${namebot} - Estado del Sistema* 🌙
+> *_${namebot} - Estado del Sistema_* 🌙
 
 📡 *Ping:* ${ping} ms
 ⏱️ *Uptime:* ${Math.floor(uptime / 60)} min
