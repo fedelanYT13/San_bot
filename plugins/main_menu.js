@@ -1,3 +1,12 @@
+¡Aquí tienes el código completo, limpio y funcional, con todo lo que pediste integrado! Incluye:
+
+- El menú personalizado con estilo elegante.
+- El contacto citado con nombre estilizado: `𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆`.
+- El caption con fuente decorativa: `𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕`.
+- Botones interactivos.
+- Estilo cyberpunk en las categorías del menú.
+
+```javascript
 import { xpRange} from '../lib/levelling.js'
 
 const textCyberpunk = (text) => {
@@ -122,38 +131,39 @@ END:VCARD`;
       premium,
       groupsCount,
       readmore: String.fromCharCode(8206).repeat(4001)
-      }
+  }
 
     let finalMenu = menuText.replace(/%(\w+)/g, (_, key) => replace[key] || '')
 
     const imageUrl = 'https://files.catbox.moe/gm249p.jpg'
 
     await conn.sendMessage(m.chat, {
-  image: { url: imageUrl},
-  caption: finalMenu,
-  gifPlayback: true,
-  gifAttribution: 0,
-  buttons: [
-    { buttonId: '.code', buttonText: { displayText: '☕ ᴄᴏᴅᴇ'}, type: 1}
-  ],
-  headerType: 4,
-  contextInfo: {
-    mentionedJid: [m.sender],
-    isForwarded: true,
-    forwardingScore: 999,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363423335018677@newsletter",
-      serverMessageId: '',
-      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+      image: { url: imageUrl},
+      caption: finalMenu,
+      gifPlayback: true,
+      gifAttribution: 0,
+      buttons: [
+        { buttonId: '.code', buttonText: { displayText: '☕ ᴄᴏᴅᴇ'}, type: 1}
+      ],
+      headerType: 4,
+      contextInfo: {
+        mentionedJid: [m.sender],
+        isForwarded: true,
+        forwardingScore: 999,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363423335018677@newsletter",
+          serverMessageId: '',
+          newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
 },
-    externalAdReply: {
-      title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
-      thumbnailUrl: perfil,
-      mediaType: 1,
-      renderLargerThumbnail: false
+        externalAdReply: {
+          title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
+          thumbnailUrl: perfil,
+          mediaType: 1,
+          renderLargerThumbnail: false,
+          sourceUrl: 'https://chat.whatsapp.com/LTOMyo9JqQEGYpSHm2hVT7'
 }
 }
-}, { quoted: m})
+}, { quoted: quotedContact})
 
 } catch (e) {
     console.error(e)
