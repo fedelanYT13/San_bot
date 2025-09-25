@@ -166,6 +166,9 @@ handler.help = ['menu', 'menú']
 handler.tags = ['main']
 handler.command = ['menu', 'menú', 'help', 'ayuda']
 handler.register = true
+handler.customPrefix = /^([!/#.]|)(menu|menú|help|ayuda)$/i
+handler.exp = 50
+
 export default handler
 
 function clockString(ms) {
