@@ -6,9 +6,9 @@ const handler = async (m, { conn, text}) => {
     let output = stdout.toString();
 
     if (output.includes('Already up to date')) {
-      output = '☕ 𝖸𝖺 𝖾𝗌𝗍𝗈𝗒 𝖺𝖼𝗍𝗎𝖺𝗅𝗂𝗓𝖺𝖽𝖺 𝗇𝗎𝖾𝗏𝖺𝗆𝖾𝗇𝗍𝖾.';
+      output = '☕ *_𝖸𝖺 𝖾𝗌𝗍𝗈𝗒 𝖺𝖼𝗍𝗎𝖺𝗅𝗂𝗓𝖺𝖽𝖺 𝗇𝗎𝖾𝗏𝖺𝗆𝖾𝗇𝗍𝖾._*';
 } else if (output.includes('Updating')) {
-      output = '🌙 𝖯𝗋𝗈𝖼𝖾𝗌𝖺𝗇𝖽𝗈, 𝖾𝗌𝗉𝖾𝗋𝖾 𝗎𝗇 𝗆𝗈𝗆𝖾𝗇𝗍𝗈 𝗆𝗂𝖾𝗇𝗍𝗋𝖺𝗌 𝗆𝖾 𝖺𝖼𝗍𝗎𝖺𝗅𝗂𝗓𝗈.\n\n' + stdout.toString();
+      output = '🌙 *_𝖯𝗋𝗈𝖼𝖾𝗌𝖺𝗇𝖽𝗈, 𝖾𝗌𝗉𝖾𝗋𝖾 𝗎𝗇 𝗆𝗈𝗆𝖾𝗇𝗍𝗈 𝗆𝗂𝖾𝗇𝗍𝗋𝖺𝗌 𝗆𝖾 𝖺𝖼𝗍𝗎𝖺𝗅𝗂𝗓𝗈._*\n\n' + stdout.toString();
 }
 
     await conn.reply(m.chat, output, m);
@@ -49,4 +49,4 @@ handler.customPrefix = /^(fix|update|up)$/i;
 handler.command = new RegExp;
 handler.owner = true;
 
-export default handler;.
+export default handler;
