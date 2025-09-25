@@ -1,9 +1,16 @@
-let handler = async (m, { conn}) => {
+let handler = async (m, { conn, args}) => {
   const texto = m.mentionedJid || [];
-  const who = texto.length> 0? texto[0]: (m.quoted? m.quoted.sender: null);
+  let who =
+    texto.length> 0
+? texto[0]
+: m.quoted
+? m.quoted.sender
+: args[0]
+? args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net'
+: null;
 
   if (!who) {
-    return m.reply('☕ Para ver la foto de perfil, etiqueta o responde al mensaje del usuario.');
+    return m.reply('☕ Para ver la foto de perfil, etiqueta, responde o escribe el número del usuario.');
 }
 
   try {
@@ -37,7 +44,7 @@ let handler = async (m, { conn}) => {
 );
 } catch (error) {
     console.error(error);
-    await m.reply('🌙 Ocurrió un error al obtener la imagen. Intenta nuevamente.');
+    await m.reply('❎ Ocurrió un error al obtener la imagen. Intenta nuevamente.');
 }
 };
 
