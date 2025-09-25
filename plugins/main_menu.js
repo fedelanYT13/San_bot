@@ -60,7 +60,7 @@ END:VCARD`;
 },
       message: {
         contactMessage: {
-          displayName: "Meta Ai",
+          displayName: "𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕",
           vcard,
 },
 },
@@ -151,7 +151,7 @@ END:VCARD`;
           thumbnailUrl: perfil,
           mediaType: 1,
           renderLargerThumbnail: false,
-          sourceUrl: 'https://chat.whatsapp.com/LTOMyo9JqQEGYpSHm2hVT7'
+          sourceUrl: 'https://moonfare.team'
 }
 }
 }, { quoted: quotedContact})
