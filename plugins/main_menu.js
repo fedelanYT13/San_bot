@@ -43,6 +43,29 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
   try {
     await conn.sendMessage(m.chat, { react: { text: '🌸', key: m.key}})
 
+    const vcard = `
+BEGIN:VCARD
+VERSION:3.0
+N:;Marck Uwu;;;
+FN:Marck Uwu
+item1.TEL;waid=13135550002:+1 (313) 555-0002
+item1.X-ABLabel:Celular
+END:VCARD`;
+
+    const quotedContact = {
+      key: {
+        fromMe: false,
+        participant: "13135550002@s.whatsapp.net",
+        remoteJid: "status@broadcast",
+},
+      message: {
+        contactMessage: {
+          displayName: "𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆",
+          vcard,
+},
+},
+};
+
     let { exp, level} = global.db.data.users[m.sender]
     let { min, xp, max} = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
@@ -99,7 +122,7 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
       premium,
       groupsCount,
       readmore: String.fromCharCode(8206).repeat(4001)
-}
+      }
 
     let finalMenu = menuText.replace(/%(\w+)/g, (_, key) => replace[key] || '')
 
