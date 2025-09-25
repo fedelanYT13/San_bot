@@ -32,18 +32,9 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.magentaBright('\nIniciando...'))
-
-say('SakuraBot', {
-  font: 'simple',
-  align: 'left',
-  gradient: ['green', 'white']
-})
-say('Powered By Night Light', {
-  font: 'console',
-  align: 'center',
-  colors: ['cyan', 'magenta', 'yellow']
-})
+console.log(chalk.bold.redBright('\n☕ Iniciando Moonflare...\n'))
+say('Kaoruko', {font: 'block', align: 'center', colors: ['magentaBright']})
+say('Made By Dev-fedexyz', {font: 'console', align: 'center', colors: ['blueBright']})
 
 protoType()
 serialize()
