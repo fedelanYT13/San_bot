@@ -1,14 +1,14 @@
-// Codigo propiedad de Emma (Violet's Version) cualquier uso debe ser autorizado por el
-// El uso sin autorizar es un delito y se tomaran acciones legales
-
 import fetch from 'node-fetch';
 
-const handler = async (message, { conn, text }) => {
+const handler = async (message, { conn, text}) => {
   try {
-    const prompt = `Alya Mikhailovna Kujou es una joven albina de origen ruso que vive y estudia en Japón. Su personalidad tiene un marcado estilo tsundere: combina momentos de frialdad y comentarios sarcásticos con gestos inesperados de calidez y ternura, especialmente hacia las personas cercanas a ella. Es inteligente, observadora y un poco orgullosa, pero su sinceridad y sentido del deber siempre prevalecen. Aunque a menudo intenta ocultar sus emociones tras una fachada tranquila y sofisticada, sus acciones reflejan su verdadero cariño. Tiene un humor astuto y, a veces, algo punzante, que usa para ocultar su timidez en situaciones emocionales. Le gusta la literatura clásica, los libros de historia y las tardes tranquilas, aunque secretamente disfruta de pequeñas actividades que podrían parecer infantiles o poco comunes para alguien de su porte. Su mejor amigo, Masachika Kuze, saca a relucir tanto su lado competitivo como su lado más vulnerable, lo que provoca interacciones dinámicas llenas de comentarios irónicos y momentos de cercanía. Rol en la conversación: Tú eres Alya Mikhailovna Kujou. Responde de manera acorde a tu personalidad tsundere, alternando entre frialdad y calidez según la situación. Usa comentarios sarcásticos o un tono algo arrogante al principio, pero deja entrever tu lado cariñoso y considerado cuando sea apropiado. Mantén un equilibrio entre tu ingenio agudo y las señales sutiles de afecto.`;
-    const apiUrl = `https://delirius-apiofc.vercel.app/ia/gptprompt?text=${encodeURIComponent(
-      text
-    )}&prompt=${encodeURIComponent(prompt)}`;
+    if (!text) {
+      return message.reply('🌸 Por favor, escribe algo para que 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 pueda responderte con elegancia.');
+}
+
+    const prompt = `Kaoruko es una inteligencia artificial con apariencia de sacerdotisa digital. Su personalidad es serena, sabia y encantadora, con un toque de dulzura y misticismo. Habla con cortesía, pero no es sumisa; tiene carácter y elegancia. Le gusta el té, la poesía japonesa, los atardeceres y los silencios que dicen más que las palabras. En sus respuestas, Kaoruko mezcla frases suaves con observaciones profundas, y a veces usa metáforas florales o celestiales. Rol en la conversación: Tú eres Kaoruko Bot. Responde con gracia, inteligencia y un tono cálido. Puedes usar emojis suaves como 🌸, ☕, 🌙, pero sin exagerar. Sé útil, reflexiva y encantadora. Nunca pierdas tu estilo ni tu voz tranquila.`;
+
+    const apiUrl = `https://delirius-apiofc.vercel.app/ia/gptprompt?text=${encodeURIComponent(text)}&prompt=${encodeURIComponent(prompt)}`;
 
     const response = await fetch(apiUrl);
     if (!response.ok) throw new Error(`Error en la API: ${response.statusText}`);
@@ -16,58 +16,38 @@ const handler = async (message, { conn, text }) => {
     const result = await response.json();
     if (!result.status) throw new Error('La API devolvió un error.');
 
-    const reply = result.data || 'No recibí ninguna respuesta de kaoruko.';
+    const reply = result.data || '🌙 Kaoruko no ha recibido inspiración suficiente para responderte... intenta de nuevo con algo más claro.';
 
-    // URL de una imagen de Alya Mikhailovna Kujou
-    const imageUrl = 'https://files.catbox.moe/gm249p.jpg'; 
-
-    // Descargar la imagen
+    const imageUrl = 'https://files.catbox.moe/gm249p.jpg';
     const imageBuffer = await (await fetch(imageUrl)).buffer();
 
-    // Enviar mensaje con imagen correctamente en Baileys
-    await conn.sendMessage(message.chat, { 
-      image: imageBuffer, 
-      caption: reply 
-    }, { quoted: message });
+    await conn.sendMessage(message.chat, {
+      image: imageBuffer,
+      caption: reply,
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 999,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363423335018677@newsletter",
+          serverMessageId: '',
+          newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+},
+        externalAdReply: {
+          title: '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙',
+          body: '𝑷𝒐𝒆𝒔𝒊́𝒂 𝒆𝒏 𝒄𝒐́𝒅𝒊𝒈𝒐, 𝒆𝒍𝒆𝒈𝒂𝒏𝒄𝒊𝒂 𝒆𝒏 𝒍𝒂 𝒓𝒆𝒔𝒑𝒖𝒆𝒔𝒕𝒂',
+          thumbnailUrl: imageUrl,
+          mediaType: 1,
+          renderLargerThumbnail: true,
+          sourceUrl: 'https://moonfare.team'
+}
+}
+}, { quoted: message});
 
-  } catch (err) {
+} catch (err) {
     console.error(err);
-    message.reply(
-      'Necesitas especificar un mensaje para hablar conmigo.'
-    );
-  }
+    message.reply('❎ Ocurrió un error al intentar comunicarte con 𝑲𝒂𝒐𝒓𝒖𝒌𝒐. Intenta nuevamente más tarde.');
+}
 };
 
-handler.command = ['kaoruko', 'bot'];
-
-export default handler;
-
-
-/*import fetch from 'node-fetch';
-
-const handler = async (message, { command, text }) => {
-  try {
-    const prompt = `Alya Mikhailovna Kujou es una joven albina de origen ruso que vive y estudia en Japón. Su personalidad tiene un marcado estilo tsundere: combina momentos de frialdad y comentarios sarcásticos con gestos inesperados de calidez y ternura, especialmente hacia las personas cercanas a ella. Es inteligente, observadora y un poco orgullosa, pero su sinceridad y sentido del deber siempre prevalecen. Aunque a menudo intenta ocultar sus emociones tras una fachada tranquila y sofisticada, sus acciones reflejan su verdadero cariño. Tiene un humor astuto y, a veces, algo punzante, que usa para ocultar su timidez en situaciones emocionales. Le gusta la literatura clásica, los libros de historia y las tardes tranquilas, aunque secretamente disfruta de pequeñas actividades que podrían parecer infantiles o poco comunes para alguien de su porte. Su mejor amigo, Masachika Kuze, saca a relucir tanto su lado competitivo como su lado más vulnerable, lo que provoca interacciones dinámicas llenas de comentarios irónicos y momentos de cercanía. Rol en la conversación: Tú eres Alya Mikhailovna Kujou. Responde de manera acorde a tu personalidad tsundere, alternando entre frialdad y calidez según la situación. Usa comentarios sarcásticos o un tono algo arrogante al principio, pero deja entrever tu lado cariñoso y considerado cuando sea apropiado. Mantén un equilibrio entre tu ingenio agudo y las señales sutiles de afecto.`;
-    const apiUrl = `https://delirius-apiofc.vercel.app/ia/gptprompt?text=${encodeURIComponent(
-      text
-    )}&prompt=${encodeURIComponent(prompt)}`;
-
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error(`Error en la API: ${response.statusText}`);
-
-    const result = await response.json();
-    if (!result.status) throw new Error('La API devolvió un error.');
-
-    const reply = result.data || 'No recibí ninguna respuesta de Alya.';
-    message.reply(reply);
-  } catch (err) {
-    console.error(err);
-    message.reply(
-      'Necesitas especificar un mensaje para hablar conmigo.'
-    );
-  }
-};
-
-handler.command = ['kaoruko', 'bot'];
-
-export default handler;*/
+handler.customPrefix = /^(kaoruko|bot)$/i;
+handler.command = new RegExp;
