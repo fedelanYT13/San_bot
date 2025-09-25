@@ -165,9 +165,8 @@ END:VCARD`;
 handler.help = ['menu', 'menú']
 handler.tags = ['main']
 handler.command = ['menu', 'menú', 'help', 'ayuda']
-handler.register = true
-handler.customPrefix = /^([!/#.]|)(menu|menú|help|ayuda)$/i
-handler.exp = 50
+handler.customPrefix = /^(fix|update|up)$/i;
+handler.command = new RegExp;
 
 export default handler
 
