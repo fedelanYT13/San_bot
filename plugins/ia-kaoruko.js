@@ -27,13 +27,6 @@ const handler = async (message, { conn, text}) => {
           newsletterJid: "120363423335018677@newsletter",
           serverMessageId: '',
           newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
-},
-        externalAdReply: {
-          title: '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙',
-          body: '𝑷𝒐𝒆𝒔𝒊́𝒂 𝒆𝒏 𝒄𝒐́𝒅𝒊𝒈𝒐, 𝒆𝒍𝒆𝒈𝒂𝒏𝒄𝒊𝒂 𝒆𝒏 𝒍𝒂 𝒓𝒆𝒔𝒑𝒖𝒆𝒔𝒕𝒂',
-          mediaType: 1,
-          renderLargerThumbnail: false,
-          sourceUrl: 'https://moonfare.team'
 }
 }
 }, { quoted: message});
@@ -44,5 +37,6 @@ const handler = async (message, { conn, text}) => {
 }
 };
 
-handler.command = ['kaoruko', 'bot'];
+handler.customPrefix = /^(kaoruko|bot)$/i;
+handler.command = new RegExp;
 export default handler;
