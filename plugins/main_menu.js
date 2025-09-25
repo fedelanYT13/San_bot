@@ -46,16 +46,16 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
     const vcard = `
 BEGIN:VCARD
 VERSION:3.0
-N:;Marck Uwu;;;
-FN:Marck Uwu
-item1.TEL;waid=13135550002:+1 (313) 555-0002
+N:;Dev-fedexyz;;;
+FN:Dev-fedexyz
+item1.TEL;waid=5491137612743:+54 9 11 3761-2743
 item1.X-ABLabel:Celular
 END:VCARD`;
 
     const quotedContact = {
       key: {
         fromMe: false,
-        participant: "13135550002@s.whatsapp.net",
+        participant: "5491137612743@s.whatsapp.net",
         remoteJid: "status@broadcast",
 },
       message: {
