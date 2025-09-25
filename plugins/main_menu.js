@@ -48,19 +48,19 @@ BEGIN:VCARD
 VERSION:3.0
 N:;Dev-fedexyz;;;
 FN:Dev-fedexyz
-item1.TEL;waid=5491137612743:+54 9 11 3761-2743
+item1.TEL;waid=13135550002:+1 (313) 555-0002
 item1.X-ABLabel:Celular
 END:VCARD`;
 
     const quotedContact = {
       key: {
         fromMe: false,
-        participant: "5491137612743@s.whatsapp.net",
+        participant: "13135550002@s.whatsapp.net",
         remoteJid: "status@broadcast",
 },
       message: {
         contactMessage: {
-          displayName: "𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆",
+          displayName: "Meta Ai",
           vcard,
 },
 },
