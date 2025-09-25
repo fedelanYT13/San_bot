@@ -162,18 +162,18 @@ END:VCARD`;
 }
 }
 
-// ✅ Comandos con prefijo (.menu,!help, etc.)
 handler.help = ['menu', 'help']
 handler.tags = ['main']
+
+// Comandos con prefijo (.menu,!help, etc.)
 handler.command = ['menu', 'help']
 
-// ✅ Comandos sin prefijo (menu, help directo)
+// Comandos sin prefijo (menu, help directo)
 handler.customPrefix = /^(menu|help)$/i
-handler.command = new RegExp
+handler.commandStart = true // activa detección sin prefijo
 
-// ✅ Experiencia por usar el comando
 handler.exp = 50
-handler.register = false
+handler.register = true
 
 export default handler
 
