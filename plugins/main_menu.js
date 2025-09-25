@@ -36,11 +36,13 @@ const defaultMenu = {
   header: '\n˚ `ヾ(≡^∇^≡)ﾉ` *%category*',
   body: '⏤͟͟͞͞☕ ⇢ %cmd\n',
   footer: '',
-  after: '\n> © 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆 ☽'
+  after: '\n> © 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒 𝖬𝗈𝗈𝖓𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆 ☽'
 }
 
 let handler = async (m, { conn, usedPrefix: _p}) => {
   try {
+    await conn.sendMessage(m.chat, { react: { text: '🌸', key: m.key}})
+
     let { exp, level} = global.db.data.users[m.sender]
     let { min, xp, max} = xpRange(level, global.multiplier)
     let name = await conn.getName(m.sender)
@@ -115,12 +117,10 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
       contextInfo: {
         mentionedJid: [m.sender],
         isForwarded: true,
-        forwardingScore: 999,
-        externalAdReply: {
-          title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
-          thumbnailUrl: perfil,
-          mediaType: 1,
-          renderLargerThumbnail: false
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363423335018677@newsletter",
+          serverMessageId: '',
+          newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
 }
 }
 }, { quoted: m})
@@ -142,4 +142,4 @@ function clockString(ms) {
   let m = isNaN(ms)? '--': Math.floor(ms / 60000) % 60
   let s = isNaN(ms)? '--': Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':')
-                     }
+}
