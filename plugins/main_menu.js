@@ -173,7 +173,7 @@ handler.command = new RegExp
 
 // ✅ Experiencia por usar el comando
 handler.exp = 50
-handler.register = true
+handler.register = false
 
 export default handler
 
