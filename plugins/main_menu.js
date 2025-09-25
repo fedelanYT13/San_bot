@@ -1,12 +1,3 @@
-¡Aquí tienes el código completo, limpio y funcional, con todo lo que pediste integrado! Incluye:
-
-- El menú personalizado con estilo elegante.
-- El contacto citado con nombre estilizado: `𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆`.
-- El caption con fuente decorativa: `𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕`.
-- Botones interactivos.
-- Estilo cyberpunk en las categorías del menú.
-
-```javascript
 import { xpRange} from '../lib/levelling.js'
 
 const textCyberpunk = (text) => {
