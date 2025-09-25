@@ -29,14 +29,10 @@ END:VCARD`;
         m.chat,
         {
             image: { url: "https://files.catbox.moe/gm249p.jpg"},
-            caption:
-                "🍙 *Proyecto Script Marck* 🍙\n" +
-                "📢 *¡Bienvenido al universo de Nagi!*\n" +
-                "🔗 Aquí tienes enlaces útiles para unirte, seguirnos y contactarnos directamente.\n" +
-                "✨ *Gracias por formar parte de esta comunidad!*",
-            title: "🌟 Nagi — Bot de WhatsApp",
+            caption: "👋 *Hola, bienvenidos.*\n🔗 *Visita nuestros links oficiales abajo.*\n\n*𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕*",
+            title: "🌟 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 — Moonflare Team",
             subtitle: "",
-            footer: "*© 𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛*\n*Todos los derechos reservados*",
+            footer: "*© 2025 – Moonflare Team*",
             interactiveButtons: [
                 {
                     name: "cta_url",
