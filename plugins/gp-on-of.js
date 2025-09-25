@@ -91,10 +91,10 @@ let handler = async (m, { conn, args, command}) => {
 📚 *Funciones disponibles:*
   └─ welcome
   └─ antienlaces
+  └─ antilinks
   └─ economia
   └─ gacha
   └─ nsfw
-  └─ soloadmin
   └─ alertas
 
 ☕ *Ejemplo:* ${command} welcome
