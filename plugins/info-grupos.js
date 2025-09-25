@@ -18,7 +18,7 @@ END:VCARD`;
 },
         message: {
             contactMessage: {
-                displayName: "Meta Ai",
+                displayName: "𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆",
                 vcard,
 },
 },
@@ -30,9 +30,9 @@ END:VCARD`;
         {
             image: { url: "https://files.catbox.moe/gm249p.jpg"},
             caption: "👋 *Hola, bienvenidos.*\n🔗 *Visita nuestros links oficiales abajo.*\n\n*𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕*",
-            title: "🌟 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 — Moonflare Team",
+            title: "🌙 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 — 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎",
             subtitle: "",
-            footer: "*© 2025 – Moonflare Team*",
+            footer: "*© 2025 – 𝖬𝗈𝗈𝗇𝖿𝗋𝖺𝗋𝖾 𝗍𝖾𝖺𝗆*",
             interactiveButtons: [
                 {
                     name: "cta_url",
@@ -54,8 +54,8 @@ END:VCARD`;
                     name: "cta_url",
                     buttonParamsJson: JSON.stringify({
                         display_text: "📞 Contacto directo",
-                        url: "https://wa.me/5491156178758",
-                        merchant_url: "https://wa.me/5491156178758",
+                        url: "https://wa.me/5491137612743",
+                        merchant_url: "https://wa.me/5491137612743",
 }),
 },
             ],
