@@ -20,13 +20,21 @@ let handler = async (m, { conn, args, command}) => {
 
   if (!setting) {
     return conn.sendMessage(m.chat, {
-      text: `☕ Debes especificar la *función* que deseas activar o desactivar.\n\n✨ Ejemplo: *${command} welcome*`,
+      text: `
+☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 necesita saber qué función deseas modificar.
+
+✨ Ejemplo: *${command} welcome*
+`.trim(),
 ...rcanal
 }, { quoted: m})
 }
 
   const reply = (name) => conn.sendMessage(m.chat, {
-    text: `📚 La función *${name}* ha sido *${status? 'activada': 'desactivada'}* en este grupo.`,
+    text: `
+📚 La función *${name}* ha sido *${status? 'activada': 'desactivada'}* en este grupo.
+
+𝑲𝒂𝒐𝒓𝒖𝒌𝒐 está al tanto 🌙
+`.trim(),
 ...rcanal
 }, { quoted: m})
 
@@ -85,7 +93,7 @@ let handler = async (m, { conn, args, command}) => {
   └─ alertas
 
 ☕ *Ejemplo:* ${command} welcome
-        `.trim(),
+`.trim(),
 ...rcanal
 }, { quoted: m})
 }
