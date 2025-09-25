@@ -1,12 +1,14 @@
 let handler = async (m, { conn, args, isOwner}) => {
-  if (!isOwner) return m.reply('☕ Este comando solo puede usarlo el owner del bot.');
+  if (!isOwner) return m.reply('🌙 Este comando solo puede usarlo el owner del bot.');
 
   const link = args[0];
   if (!link ||!link.includes('chat.whatsapp.com/')) {
-    return m.reply('🔒 Proporciona un enlace válido de invitación de grupo.');
+    return m.reply('☕ Proporciona un enlace válido de invitación de grupo.');
 }
 
-  const code = link.split('chat.whatsapp.com/')[1].trim();
+  const code = link.split('chat.whatsapp.com/')[1]?.split('?')[0]?.trim();
+  if (!code) return m.reply('⚠️ No se pudo extraer el código del enlace.');
+
   try {
     const res = await conn.groupAcceptInvite(code);
     const metadata = await conn.groupMetadata(res);
@@ -34,5 +36,3 @@ handler.help = ['join <enlace>'];
 handler.tags = ['owner'];
 handler.command = ['join'];
 handler.rowner = true;
-
-export default handler;
