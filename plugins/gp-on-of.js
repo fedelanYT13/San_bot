@@ -1,26 +1,14 @@
 const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙'
 const dev = '© 𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'
-const icon = 'https://files.catbox.moe/gm249p.jpg'
-const redes = 'https://moonfare.team'
 
 const rcanal = {
   contextInfo: {
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363423335018677@newsletter",
-      serverMessageId: '',
-      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
-},
     externalAdReply: {
       title: namebot,
       body: dev,
       mediaUrl: null,
-      description: null,
-      previewType: "PHOTO",
-      thumbnailUrl: icon,
-      sourceUrl: redes,
-      mediaType: 1,
-      renderLargerThumbnail: false
+      sourceUrl: null,
+      previewType: "NONE"
 }
 }
 }
@@ -83,8 +71,8 @@ let handler = async (m, { conn, args, command}) => {
       break
 
     default:
-  return conn.sendMessage(m.chat, {
-    text: `
+      return conn.sendMessage(m.chat, {
+        text: `
 🌙 La función ingresada no es *válida*
 
 📚 *Funciones disponibles:*
@@ -97,7 +85,7 @@ let handler = async (m, { conn, args, command}) => {
   └─ alertas
 
 ☕ *Ejemplo:* ${command} welcome
-    `.trim(),
+        `.trim(),
 ...rcanal
 }, { quoted: m})
 }
@@ -107,4 +95,5 @@ handler.help = ['on <función>', 'off <función>']
 handler.tags = ['group']
 handler.command = ['on', 'off']
 handler.admin = true
+
 export default handler
