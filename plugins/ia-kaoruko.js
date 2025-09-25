@@ -37,6 +37,5 @@ const handler = async (message, { conn, text}) => {
 }
 };
 
-handler.customPrefix = /^(kaoruko|bot)$/i;
-handler.command = new RegExp;
+handler.command = ['kaoruko', 'bot'];
 export default handler;
