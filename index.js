@@ -32,9 +32,18 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.bold.redBright('\n☕ Iniciando Moonflare...\n'))
-say('Kaoruko', {font: 'block', align: 'center', colors: ['magentaBright']})
-say('Made By Dev-fedexyz', {font: 'console', align: 'center', colors: ['blueBright']})
+console.log(chalk.magentaBright('\n☕ Iniciando moonfare...'))
+
+say('Kaoruko', {
+  font: 'simple',
+  align: 'left',
+  gradient: ['green', 'white']
+})
+say('Powered By Dev-fedexyz', {
+  font: 'console',
+  align: 'center',
+  colors: ['cyan', 'magenta', 'yellow']
+})
 
 protoType()
 serialize()
@@ -114,7 +123,7 @@ const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 mobile: MethodMobile, 
-browser: ["MacOs", "Safari"],
+browser: ["Moonflare", "☕"],
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -344,7 +353,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn?.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `${packname} | 🫛 Uptime: ${uptime}`;
+  const bio = `${packname} | 🍁 Uptime: ${uptime}`;
   await conn?.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
