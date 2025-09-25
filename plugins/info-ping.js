@@ -1,61 +1,60 @@
-import os from 'os'
-import { performance} from 'perf_hooks'
+const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙';
+const dev = '© 𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛';
+const icon = 'https://files.catbox.moe/gm249p.jpg';
+const redes = 'https://moonfare.team';
 
-const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙'
-const dev = '𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'
-const icon = 'https://files.catbox.moe/gm249p.jpg'
-const redes = 'https://moonfare.team'
 const rcanal = {
   contextInfo: {
+    mentionedJid: [],
     isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363423335018677@newsletter",
-      serverMessageId: '',
-      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
-},
+    forwardingScore: 999,
     externalAdReply: {
       title: namebot,
       body: dev,
       mediaUrl: null,
-      description: null,
+      sourceUrl: redes,
       previewType: "PHOTO",
       thumbnailUrl: icon,
-      sourceUrl: redes,
       mediaType: 1,
       renderLargerThumbnail: false
 }
 }
 }
 
-async function handler(m, { conn}) {
-  const start = performance.now()
-  const ping = Math.round(performance.now() - start)
-  const uptime = process.uptime()
-  const usedMemory = process.memoryUsage().rss / 1024 / 1024
-  const totalMemory = os.totalmem() / 1024 / 1024
-  const cpuModel = os.cpus()[0].model
-  const platform = os.platform()
-  const arch = os.arch()
-  const currentTime = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires'})
+let handler = async (m, { conn}) => {
+  const start = new Date().getTime();
+  const { key} = await conn.sendMessage(m.chat, { text: '⏳ Cargando ping...'}, { quoted: m});
+  const end = new Date().getTime();
 
-  const info = `
-> *_${namebot} - Estado del Sistema_* 🌙
+  const latency = end - start;
+  const uptime = process.uptime(); // en segundos
+  const hours = Math.floor(uptime / 3600);
+  const minutes = Math.floor((uptime % 3600) / 60);
+  const secondsUp = Math.floor(uptime % 60);
+  const uptimeFormatted = `${hours}h ${minutes}m ${secondsUp}s`;
+  const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // en MB
 
-📡 *Ping:* ${ping} ms
-⏱️ *Uptime:* ${Math.floor(uptime / 60)} min
-💾 *RAM usada:* ${usedMemory.toFixed(2)} MB / ${totalMemory.toFixed(2)} MB
-🧠 *CPU:* ${cpuModel}
-🖥️ *Sistema:* ${platform} (${arch})
-🕰️ *Hora actual:* ${currentTime}
-`.trim()
+  const response = [
+  '╭─❍ *Estado del Sistema* ❍─╮',
+  `👤 *Usuario:* @${m.sender.split('@')[0]}`,
+  `🚀 *Ping:* ${latency} ms`,
+  `⏳ *Uptime:* ${uptimeFormatted}`,
+  `💾 *RAM usada:* ${usedRAM} MB`,
+  '╰────────────────────────╯'
+].join('\n');
 
-  await conn.sendMessage(m.chat, {
-    text: info,
+  setTimeout(async () => {
+    await conn.sendMessage(m.chat, {
+      text: response,
+      edit: key,
+      mentions: [m.sender],
 ...rcanal
-}, { quoted: m})
-}
+}, { quoted: m});
+}, latency);
+};
 
-handler.command = ['ping', 'info', 'estado']
-handler.help = ['ping', 'info']
-handler.tags = ['info']
-export default handler
+handler.help = ['ping', 'p'];
+handler.tags = ['info'];
+handler.command = ['ping', 'p'];
+
+export default handler;
