@@ -32,14 +32,14 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.magentaBright('\n☕ Iniciando moonfare...'))
+console.log(chalk.magentaBright('\nIniciando...'))
 
-say('Kaoruko', {
+say('SakuraBot', {
   font: 'simple',
   align: 'left',
   gradient: ['green', 'white']
 })
-say('Powered By Dev-fedexyz', {
+say('Powered By Night Light', {
   font: 'console',
   align: 'center',
   colors: ['cyan', 'magenta', 'yellow']
@@ -123,7 +123,7 @@ const connectionOptions = {
 logger: pino({ level: 'silent' }),
 printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
 mobile: MethodMobile, 
-browser: ["Moonflare", "team"],
+browser: ["MacOs", "Safari"],
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
@@ -353,7 +353,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn?.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `${packname} | 🍁 Uptime: ${uptime}`;
+  const bio = `${packname} | 🫛 Uptime: ${uptime}`;
   await conn?.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
