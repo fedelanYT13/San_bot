@@ -18,12 +18,8 @@ const handler = async (message, { conn, text}) => {
 
     const reply = result.data || '🌙 Kaoruko no ha recibido inspiración suficiente para responderte... intenta de nuevo con algo más claro.';
 
-    const imageUrl = 'https://files.catbox.moe/gm249p.jpg';
-    const imageBuffer = await (await fetch(imageUrl)).buffer();
-
     await conn.sendMessage(message.chat, {
-      image: imageBuffer,
-      caption: reply,
+      text: reply,
       contextInfo: {
         isForwarded: true,
         forwardingScore: 999,
@@ -35,9 +31,8 @@ const handler = async (message, { conn, text}) => {
         externalAdReply: {
           title: '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙',
           body: '𝑷𝒐𝒆𝒔𝒊́𝒂 𝒆𝒏 𝒄𝒐́𝒅𝒊𝒈𝒐, 𝒆𝒍𝒆𝒈𝒂𝒏𝒄𝒊𝒂 𝒆𝒏 𝒍𝒂 𝒓𝒆𝒔𝒑𝒖𝒆𝒔𝒕𝒂',
-          thumbnailUrl: imageUrl,
           mediaType: 1,
-          renderLargerThumbnail: true,
+          renderLargerThumbnail: false,
           sourceUrl: 'https://moonfare.team'
 }
 }
