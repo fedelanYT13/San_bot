@@ -106,21 +106,28 @@ let handler = async (m, { conn, usedPrefix: _p}) => {
     const imageUrl = 'https://files.catbox.moe/gm249p.jpg'
 
     await conn.sendMessage(m.chat, {
-      image: { url: imageUrl},
-      caption: finalMenu,
-      gifPlayback: true,
-      gifAttribution: 0,
-      buttons: [
-        { buttonId: '.code', buttonText: { displayText: '☕ ᴄᴏᴅᴇ'}, type: 1}
-      ],
-      headerType: 4,
-      contextInfo: {
-        mentionedJid: [m.sender],
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: "120363423335018677@newsletter",
-          serverMessageId: '',
-          newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+  image: { url: imageUrl},
+  caption: finalMenu,
+  gifPlayback: true,
+  gifAttribution: 0,
+  buttons: [
+    { buttonId: '.code', buttonText: { displayText: '☕ ᴄᴏᴅᴇ'}, type: 1}
+  ],
+  headerType: 4,
+  contextInfo: {
+    mentionedJid: [m.sender],
+    isForwarded: true,
+    forwardingScore: 999,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: "120363423335018677@newsletter",
+      serverMessageId: '',
+      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+},
+    externalAdReply: {
+      title: '☕ 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 🌙\n⚡︎ 𝑽𝒆𝒓𝒔𝒊𝒐𝒏 𝟐.𝟎.𝟐.𝟓 ☽',
+      thumbnailUrl: perfil,
+      mediaType: 1,
+      renderLargerThumbnail: false
 }
 }
 }, { quoted: m})
