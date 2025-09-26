@@ -32,11 +32,11 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 
 let { say } = cfonts
 
-console.log(chalk.magentaBright('\n🌙 Iniciando SenkoBot-MD...\n'))
+console.log(chalk.magentaBright('\n🌙 Iniciando...\n'))
 
 say('Kaoruko', {
-  font: 'block',
-  align: 'center',
+  font: 'simple',
+  align: 'left',
   gradient: ['red', 'yellow', 'green', 'cyan', 'blue', 'magenta'],
   transitionGradient: true
 })
