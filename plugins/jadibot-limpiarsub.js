@@ -1,22 +1,24 @@
+import { WebSocket} from 'ws'
+
 const namebot = '☕ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 🌙'
 const dev = '𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚𝒛'
 const icon = 'https://files.catbox.moe/gm249p.jpg'
-const redes = 'moonfare.team'
+const redes = 'https://moonfare.team'
 
 const rcanal = {
   contextInfo: {
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-      newsletterJid: "120363423335018677@newsletter",
+      newsletterJid: '120363423335018677@newsletter',
       serverMessageId: '',
-      newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+      newsletterName: '🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽'
 },
     externalAdReply: {
       title: namebot,
       body: dev,
       mediaUrl: null,
       description: null,
-      previewType: "PHOTO",
+      previewType: 'PHOTO',
       thumbnailUrl: icon,
       sourceUrl: redes,
       mediaType: 1,
@@ -26,17 +28,23 @@ const rcanal = {
 }
 
 async function handler(m, { conn}) {
-  const activeBots = global.conns.filter(bot => bot.user && bot.ws?.socket?.readyState!== ws.CLOSED)
+  const activeBots = global.conns.filter(
+    bot => bot.user && bot.ws?.socket?.readyState!== WebSocket.CLOSED
+)
 
   if (activeBots.length <= 1) {
-    await conn.sendMessage(m.chat, {
-      text: '⚠️ No hay Sub-Bots activos para eliminar.',
+    await conn.sendMessage(
+      m.chat,
+      {
+        text: '⚠️ No hay Sub-Bots activos para eliminar.',
 ...rcanal
-}, { quoted: m})
+},
+      { quoted: m}
+)
     return
 }
 
-  const subBots = activeBots.slice(1) // Excluye el Bot Principal
+  const subBots = activeBots.slice(1)
 
   for (const bot of subBots) {
     try {
@@ -47,13 +55,17 @@ async function handler(m, { conn}) {
 }
 }
 
-  await conn.sendMessage(m.chat, {
-    text: `✅ Se han eliminado ${subBots.length} Sub-Bots.\n🤖 Bot Principal sigue activo.`,
+  await conn.sendMessage(
+    m.chat,
+    {
+      text: `✅ Se han eliminado ${subBots.length} Sub-Bots.\n🤖 Bot Principal sigue activo.`,
 ...rcanal
-}, { quoted: m})
+},
+    { quoted: m}
+)
 }
 
 handler.command = ['limpiar', 'limpiarsub']
 handler.help = ['limpiar']
-handler.tags = ['jadibot']
+handler.tags = ['serbot']
 export default handler
