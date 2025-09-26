@@ -10,8 +10,8 @@ export async function before(m, { conn, participants, groupMetadata}) {
   const actionUser = m.key.participant? await conn.getName(m.key.participant): null;
 
   const actionMessages = {
-    [WAMessageStubType.GROUP_PARTICIPANT_ADD]: actionUser? `\n┊➤ *Agregado por ›* @${m.key.participant.split`@`[0]}`: '',
-    [WAMessageStubType.GROUP_PARTICIPANT_REMOVE]: actionUser? `\n┊➤ *Eliminado por ›* @${m.key.participant.split`@`[0]}`: '',
+    [WAMessageStubType.GROUP_PARTICIPANT_ADD]: actionUser? `\n┊ ☕ *Agregado por ›* @${m.key.participant.split`@`[0]}`: '',
+    [WAMessageStubType.GROUP_PARTICIPANT_REMOVE]: actionUser? `\n┊ 🌙 *Eliminado por ›* @${m.key.participant.split`@`[0]}`: '',
     [WAMessageStubType.GROUP_PARTICIPANT_LEAVE]: ''
 };
 
@@ -26,7 +26,7 @@ export async function before(m, { conn, participants, groupMetadata}) {
 .replace('@date', new Date().toLocaleString())
 .replace('@users', `${memberCount}`)
 .replace('@type', actionMessages[m.messageStubType])
-.replace('@desc', groupMetadata.desc?.toString() || '☕ Sin Desc 🍁');
+.replace('@desc', groupMetadata.desc?.toString() || '☕ Sin descripción 🍁');
 };
 
   const welcomeMessage = formatText(chat.sWelcome || `╭───⌁ 𝑲𝒂𝒐𝒓𝒖𝒌𝒐 - 𝑩𝒐𝒕 𝑾𝑨 ⌁───╮
