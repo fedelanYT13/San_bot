@@ -123,7 +123,7 @@ var handler = async (m, { conn, text, participants, isOwner, isAdmin}) => {
 
 handler.help = ['n']
 handler.tags = ['grupo']
-handler.command = [''notificar', 'tag']
+handler.command = ['notificar', 'tag']
 handler.group = true
 handler.admin = true
 handler.register = true
