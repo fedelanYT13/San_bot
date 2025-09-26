@@ -7,8 +7,6 @@ export async function before(m, { conn}) {
 
   globalThis.redes = [canal, api, git, md].getRandom()
 
-  const icon = 'https://cdn.stellarwa.xyz/files/1758842359325.jpeg' // Asegúrate que esta URL exista
-
   const canales = Object.entries(global.my).reduce((acc, [key, value]) => {
     if (key.startsWith('ch')) {
       const index = key.slice(2)
