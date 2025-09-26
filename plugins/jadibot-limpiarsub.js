@@ -65,7 +65,7 @@ async function handler(m, { conn}) {
 )
 }
 
-handler.command = ['limpiar', 'limpiarsub'],
-handler.help = ['limpiar'],
-handler.tags = ['serbot']
+handler.command = ['limpiar', 'limpiarsub']
+handler.help = ['limpiar']
+handler.tags = ['jadibot']
 export default handler
