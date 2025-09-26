@@ -163,7 +163,7 @@ if (!!phoneNumber) {
 addNumber = phoneNumber.replace(/[^0-9]/g, '')
 } else {
 do {
-phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`✎ Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
+phoneNumber = await question(chalk.bgBlack(chalk.bold.greenBright(`✎  Por favor, Ingrese el número de WhatsApp.\n${chalk.bold.magentaBright('---> ')}`)))
 phoneNumber = phoneNumber.replace(/\D/g,'')
 if (!phoneNumber.startsWith('+')) {
 phoneNumber = `+${phoneNumber}`
@@ -174,14 +174,14 @@ addNumber = phoneNumber.replace(/\D/g, '')
 setTimeout(async () => {
 let codeBot = await conn.requestPairingCode(addNumber)
 codeBot = codeBot.match(/.{1,4}/g)?.join("-") || codeBot
-console.log(chalk.bold.white(chalk.bgMagenta(`✦ CÓDIGO DEL BOT ✦`)), chalk.bold.white(chalk.white(codeBot)))
+console.log(chalk.bold.white(chalk.bgMagenta(`☕ CÓDIGO BOT...`)), chalk.bold.white(chalk.white(codeBot)))
 }, 3000)
 }}}
 }
 
 conn.isInit = false;
 conn.well = false;
-conn.logger.info(`[ ✦ ]  I N I C I A N D O\n`)
+conn.logger.info(`[ 🌙 ]  INICIANDO...\n`)
 
 if (!opts['test']) {
 if (globalThis.db) setInterval(async () => {
@@ -210,14 +210,14 @@ console.log(chalk.green.bold(`
         if (connection === "open") {
         await joinChannels(conn)
         await startSub()
- console.log(chalk.bold.greenBright('\n✩ ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈✦ 𝗢𝗡𝗟𝗜𝗡𝗘 ✦┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ ✩\n│\n│★ CONEXIÓN EXITOSA CON WHATSAPP 🌷\n│\n✩ ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈✦ ✅  ✦┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ ✩'))
+ console.log(chalk.bold.greenBright('\n•┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈✦ TIEMPO ✦┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ ✩\n│\n│☕ CONEXIÓN CON KAORUKO 🌷\n│\n✩ ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈✦ ✅  ✦┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈ •'))
         }
 let reason = new Boom(lastDisconnect?.error)?.output?.statusCode
 if (connection === "close") {
 if ([401, 440, 428, 405].includes(reason)) {      
-console.log(chalk.red(`→ (${code}) › Cierra la session Owner.`));
+console.log(chalk.red(`→ (${code}) › Cierra la session del bot.`));
 }
-console.log(chalk.yellow("→ Reconectando el Bot Owner..."));
+console.log(chalk.yellow("→ Reconectando con el bot..."));
 await globalThis.reloadHandler(true).catch(console.error)
 }};
 
@@ -355,7 +355,7 @@ setInterval(async () => {
   if (stopped === 'close' || !conn || !conn?.user) return;
   const _uptime = process.uptime() * 1000;
   const uptime = clockString(_uptime);
-  const bio = `${packname} | 🫛 Uptime: ${uptime}`;
+  const bio = `${packname} | ⏳ Tiempo: ${uptime}`;
   await conn?.updateProfileStatus(bio).catch((_) => _);
 }, 60000);
 function clockString(ms) {
