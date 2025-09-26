@@ -28,6 +28,7 @@ global.dev = '© 𝑴𝒂𝒅𝒆 𝒃𝒚 𝑫𝒆𝒗-𝒇𝒆𝒅𝒆𝒙𝒚
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
+global.icon = 'https://cdn.stellarwa.xyz/files/1758842359325.jpeg'
 global.currency = 'KaorCoins'
 global.sessions = 'sessions/session-bot'
 global.jadi = 'sessions/session-sub'
