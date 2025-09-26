@@ -1,11 +1,14 @@
 export async function before(m, { conn}) {
+
   const canal = 'https://whatsapp.com/channel/0029Vb6EMjb6GcGKmVITlG2p'
   const canal2 = 'https://whatsapp.com/channel/0029Vb6EMjb6GcGKmVITlG2p'
   const api = 'https://api.moonfare.xyz'
   const git = 'https://github.com/Dev-fedexyz'
   const md = 'https:/moonfare.team'
 
-  globalThis.redes = [canal, api, git, md].getRandom()
+  globalThis.redes = [canal, canal2, api, git, md].getRandom()
+
+  const icon = 'https://cdn.stellarwa.xyz/files/1758842359325.jpeg'
 
   const canales = Object.entries(global.my).reduce((acc, [key, value]) => {
     if (key.startsWith('ch')) {
