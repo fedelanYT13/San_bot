@@ -3,84 +3,80 @@ import axios from 'axios';
 function isValidMediafireUrl(url) {
   try {
     const parsed = new URL(url);
-    const hostOk = parsed.hostname.includes('mediafire.com');
-    const pathOk = parsed.pathname.includes('/file/');
-    const queryOk = parsed.search.length > 1;
-    return hostOk && (pathOk || queryOk);
-  } catch {
+    const isMediafireHost = parsed.hostname.includes('mediafire.com');
+    const hasFilePath = parsed.pathname.includes('/file/');
+    const hasQuery = parsed.search.length> 1;
+    return isMediafireHost && (hasFilePath || hasQuery);
+} catch {
     return false;
-  }
+}
 }
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
+const handler = async (m, { conn, args, usedPrefix, command}) => {
   try {
-    if (!args[0]) {
-      return m.reply(
-        `☕ Ingresa un enlace de un apk de mediafire o un titulo.`
-      );
-    }
-
     const input = args.join(' ');
-    const isValidUrl = isValidMediafireUrl(input);
-
-    // await conn.sendMessage(m.chat, { text: '⏳ *Procesando solicitud...*' }, { quoted: m });
+    if (!input) {
+      return m.reply(`☕ Por favor, ingresa un enlace de *MediaFire* o una palabra clave para buscar.\nEjemplo: ${usedPrefix}${command} GTA San Andreas`);
+}
 
     let mediafireUrl = input;
+    const isUrl = isValidMediafireUrl(input);
 
-    if (!isValidUrl) {
+    if (!isUrl) {
       const searchRes = await axios.get(`${api.url}/search/mediafire?query=${encodeURIComponent(input)}&apikey=${api.key}`);
       const searchData = searchRes.data;
 
-      if (!searchData.status || !searchData.results?.length) {
-        return m.reply('🌙 No se encontraron resultados para tu búsqueda.');
-      }
+      if (!searchData.status ||!searchData.results?.length) {
+        return m.reply('🌙 No se encontraron resultados para tu búsqueda. Intenta con otro título.');
+}
 
       const result = searchData.results[Math.floor(Math.random() * searchData.results.length)];
       mediafireUrl = result.url;
-    }
+}
 
     const response = await axios.get(`${api.url}/dow/mediafire?url=${mediafireUrl}&apikey=${api.key}`);
-    const data = response.data;
+    const { status, data} = response.data;
 
-    if (!data.status || !data.data) {
-      return m.reply('🌙 No se pudo procesar el enlace.');
-    }
+    if (!status ||!data) {
+      return m.reply('🌙 No se pudo procesar el enlace. Verifica que sea válido o público.');
+}
 
-    const { title, peso, fecha, tipo, dl } = data.data;
+    const { title, peso, fecha, tipo, dl} = data;
 
-    const info = `📦 *Archivo encontrado:*\n\n` +
+    const infoMsg = `📦 *Archivo encontrado:*\n\n` +
       `📄 *Nombre:* ${title}\n` +
       `📦 *Peso:* ${peso}\n` +
       `📅 *Fecha:* ${fecha}\n` +
       `📁 *Tipo:* ${tipo}\n\n` +
       `🔗 *Enlace directo:* ${dl}`;
 
-    await conn.sendMessage(m.chat, { text: info, ...fake }, { quoted: m });
+    await conn.sendMessage(m.chat, { text: infoMsg}, { quoted: m});
 
-    if (!/GB|gb/.test(peso)) {
+    const isTooLarge = /GB|gb/.test(peso);
+    if (!isTooLarge) {
       await conn.sendMessage(
         m.chat,
         {
-          document: { url: dl },
+          document: { url: dl},
           mimetype: tipo,
           fileName: title,
-        },
-        { quoted: m }
-      );
-    } else {
+},
+        { quoted: m}
+);
+} else {
       await conn.sendMessage(m.chat, {
-        text: `☕ *El archivo supera el límite permitido para envío directo.*`
-      }, { quoted: m });
-    }
+        text: `☕ *El archivo supera el límite permitido para envío directo.*\nPuedes descargarlo manualmente desde el enlace.`
+}, { quoted: m});
+}
 
-  } catch (error) {
-    // console.error(error);
-    m.reply('☁️ No se puede realizar la descarga. Intenta nuevamente.')
-  }
+} catch (error) {
+    console.error('Error en MediaFire handler:', error);
+    m.reply('🌙 Ocurrió un error al procesar tu solicitud. Intenta nuevamente más tarde.');
+}
 };
 
 handler.help = ['mediafire', 'mf'];
-handler.tags = ['dow'];
+handler.tags = ['descargas'];
 handler.command = ['mediafire', 'mf'];
 
 export default handler;
