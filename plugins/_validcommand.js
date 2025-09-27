@@ -1,59 +1,44 @@
-export async function before(m, { groupMetadata }) {
-  if (!m.text || !globalThis.prefix.test(m.text)) {
-    return;
-  }
+export async function before(m, { groupMetadata}) {
+
+  if (!m.text ||!globalThis.prefix.test(m.text)) return;
 
   const usedPrefix = globalThis.prefix.exec(m.text)[0];
-  const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase(); 
+  const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
 
-  const validCommand = (command, plugins) => {
-    for (let plugin of Object.values(plugins)) {
-      if (plugin.command && (Array.isArray(plugin.command) ? plugin.command : [plugin.command]).includes(command)) {
-        return true;
-      }
-    }
-    return false;
-  };
+  const isValidCommand = (cmd, plugins) => {
+    return Object.values(plugins).some(plugin => {
+      const cmds = Array.isArray(plugin.command)? plugin.command: [plugin.command];
+      return cmds.includes(cmd);
+});
+};
 
+  const chat = globalThis.db.data.chats[m.chat];
+  const botId = this.user.jid;
+  const settings = globalThis.db.data.settings[botId];
 
-  let chat = globalThis.db.data.chats[m.chat];
-  let id = this.user.jid;
-  let settings = globalThis.db.data.settings[id];
-  let owner = [...globalThis.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
+  const isOwner = globalThis.owner
+.map(([number]) => number.replace(/[^0-9]/g, '') + '@s.whatsapp.net')
+.includes(m.sender);
 
-  if (chat.adminonly) return;
-  if (settings.self) return;
-  if (!command) return;
-  if (command === 'mute') return;
-  if (chat.bannedGrupo && !owner) return
+  if (chat?.adminonly) return;
+  if (settings?.self) return;
+  if (!command || command === 'mute') return;
+  if (chat?.bannedGrupo &&!isOwner) return;
 
-/*try {
-let chtxt = ` ֯　ׅ🫗ֶ֟ㅤ *Usuario ›* ${m.pushName}
+  if (!isValidCommand(command, globalThis.plugins)) {
+    const reply = `☕ El comando *${command}* no existe.\n> Usa *${usedPrefix}menu* para ver la lista de comandos disponibles.`;
 
- ׄ 🎋 ׅ り *Comando usado ›* ${command}
- ׄ 🌾 ׅ り *Visita ›* api.stellarwa.xyz
- ׄ 🌿 ׅ り *Bot ›* ${wm}
- ׄ 🥗 ׅ り *Versión del bot ›* ^0.0.9`
-
-let ppch = await this.profilePictureUrl(m.sender, 'image').catch(_ => "https://stellarwa.xyz/files/1757206448404.jpeg")
-global.conn.sendMessage(my.ch5, { text: chtxt,
-contextInfo: { 
-externalAdReply: {
-title: "🕸 𝗜𝗡𝗙𝗢𝗥𝗠𝗔𝗖𝗜𝗢́𝗡 🕸",
-body: '🐼 ¡Nuevo comando usado!',
-thumbnailUrl: ppch,
-sourceUrl: redes,
-mediaType: 2,
-showAdAttribution: false,
-renderLargerThumbnail: false
-}}}, { quoted: null }) 
-} catch (e) {
-console.log(`[ 🐼  ]  Error al enviar el mensaje al canal.\n[ 🕸  ]  ${e}`)
-}*/
-
-  if (validCommand(command, globalThis.plugins)) {
-  } else {
-    const comando = command;
-    await m.reply(`☕ El comando *${comando}* no existe.\n> Usa *${usedPrefix}menu* para ver la lista de comandos);
-  }
+    await conn.sendMessage(m.chat, {
+      text: reply,
+      contextInfo: {
+        isForwarded: true,
+        forwardingScore: 999,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: "120363423335018677@newsletter",
+          serverMessageId: '',
+          newsletterName: "🌘 𝑴𝒐𝒐𝒏𝒇𝒓𝒂𝒓𝒆 𝒕𝒆𝒂𝒎 ☽"
+}
+}
+});
+}
 }
