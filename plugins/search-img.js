@@ -3,7 +3,7 @@ import { googleImage} from '@bochilteam/scraper';
 const handler = async (m, { conn, text, usedPrefix, command}) => {
   if (!text?.trim()) {
     return conn.sendMessage(m.chat, {
-      text: `☕ *Uso correcto:*\n${usedPrefix + command} Naruto Uzumaki`,
+      text: `☕ *Uso correcto:*\n${usedPrefix + command} Kaoruko`,
 }, { quoted: m});
 }
 
