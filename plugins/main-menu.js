@@ -41,7 +41,7 @@ const defaultMenu = {
 
 let handler = async (m, { conn, usedPrefix: _p}) => {
   try {
-    await conn.sendMessage(m.chat, { react: { text: '🌸', key: m.key}})
+    await conn.sendMessage(m.chat, { react: { text: '🌙', key: m.key}})
 
     const vcard = `
 BEGIN:VCARD
